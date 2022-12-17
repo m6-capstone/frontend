@@ -1,11 +1,11 @@
-import Description from "./components/Description";
 import { Router } from "./routes";
+import Comments from "./components/Comments";
 
 function App() {
   return (
     <>
       {/* <Router /> */}
-      <Description/>
+      <Comments/>
     </>
   );
 }
