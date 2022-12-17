@@ -8,7 +8,7 @@ export const Theme: DefaultTheme = {
       brand3: "#B0A6F0",
       brand4: "#EDEAFD",
     },
-    "grey-scale": {
+    grey: {
       grey0: "#0B0D0D",
       grey1: "#212529",
       grey2: "#495057",
@@ -20,7 +20,7 @@ export const Theme: DefaultTheme = {
       grey8: "#F1F3F5",
       grey9: "#F8F9FA",
       grey10: "#FDFDFD",
-      "white-fixed": "#FFFFFF",
+      white: "#FFFFFF",
     },
     feedback: {
       alert1: "#CD2B31",
@@ -193,4 +193,5 @@ export const Theme: DefaultTheme = {
       },
     },
   },
+  
 };
