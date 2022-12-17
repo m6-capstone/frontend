@@ -9,7 +9,7 @@ declare module "styled-components" {
 
 interface IColors {
   brand: IColorsBrand;
-  "grey-scale": IColorsGreyScale;
+  grey: IColorsGreyScale;
   feedback: IColorsFeedback;
   random: IColorsRandom;
 }
@@ -33,7 +33,7 @@ interface IColorsGreyScale {
   grey8: string;
   grey9: string;
   grey10: string;
-  "white-fixed": string;
+  white: string;
 }
 
 interface IColorsFeedback {

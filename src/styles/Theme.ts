@@ -132,7 +132,7 @@ export const Theme: DefaultTheme = {
         "font-weight": "500",
         "font-size": "16px",
         "line-height": "20px",
-      },
+      }
     },
     text: {
       "body-1-400": {
