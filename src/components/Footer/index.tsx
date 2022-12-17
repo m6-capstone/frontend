@@ -1,5 +1,5 @@
 import { Container } from './style'
-import  Logotipo  from '../../assets/motors-shop.png'
+import Logotipo from '../../assets/motors-shop.png'
 
 export default function Footer() {
     const backToTop = () =>{
