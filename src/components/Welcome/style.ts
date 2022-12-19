@@ -7,7 +7,7 @@ export const WelcomeContainer = styled.div`
     align-items: center;
     text-align: center;
     gap: 20px;
-    background-color: ${(props) => props.theme.colors.brand.brand2};   
+    background-color: ${(props) => props.theme.colors.brand2};   
     height: 100vh;
 `
 export const TitleContainer = styled.div`
@@ -20,11 +20,11 @@ export const TitleContainer = styled.div`
     }
 `
 export const Title = styled.h2`
-    color: ${(props) => props.theme.colors.grey.white};
+    color: ${(props) => props.theme.colors.white};
     ${(props) => props.theme.typography.heading["heading-3-600"]}
 `
 export const Text = styled.p`
-    color: ${(props) => props.theme.colors.grey.white};
+    color: ${(props) => props.theme.colors.white};
     ${(props) => props.theme.typography.text["body-1-400"]}
 `
 export const ButtonContainer = styled.div`
@@ -45,7 +45,7 @@ export const Button = styled.button`
     width: 90%;
     border-radius: 4px;
     background-color: transparent;
-    border: 1.5px solid ${(props) => props.theme.colors.grey.grey10};
+    border: 1.5px solid ${(props) => props.theme.colors.grey10};
     color: ${(props) => props.theme.colors.grey.white};
     ${(props) => props.theme.typography.text["button-big-text"]}
 
