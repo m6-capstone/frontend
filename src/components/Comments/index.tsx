@@ -1,15 +1,15 @@
-import { Container } from "./style"
+import { Container, Title, CommentsContainer, Avatar, Name, Date, Comments} from "./style"
 
-export default function Comments() {
+export default function comments() {
   return (
     <Container>
-        <h3 className="comments__title">Comentários</h3>
-        <div className="comments__container">
-            <span className="comments__avatar">DJ</span>
-            <span className="comments__owner">Daniel Josias</span>
-            <span className="comments__date">• há 3 dias</span>
-        </div>
-        <p className="comments">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p> 
+        <Title>Comentários</Title>
+        <CommentsContainer>
+          <Avatar>DJ</Avatar>
+          <Name>Daniel Josias</Name>
+          <Date>• há 3 dias</Date>
+        </CommentsContainer>
+        <Comments>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Comments> 
     </Container>
   )
 }
