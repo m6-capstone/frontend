@@ -6,64 +6,42 @@ export const Container = styled.div`
     align-items: flex-start;
     padding: 36px 28px;
     gap: 24px;
-    background-color: ${(props) => props.theme.colors.grey.white};
-    
-    .comments__title{
-        font-family: 'Lexend';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 25px;
-        color: ${(props) => props.theme.colors.grey.grey1};
-    }
-    
-    .comments__container{
-        display: flex;
-        align-items: center;
-        gap: 24px;
-    }
-    
-    .comments__avatar{
-        display: flex;
-        text-align:  center;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 0px;
-        color: ${(props) => props.theme.colors.grey.white};
-        background-color: ${(props) => props.theme.colors.random.random9};
-        border-radius: 15px;
-        width: 30px;
-        height: 30px;
-    }
-    
-    .comments__owner{
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 24px;
-        color: ${(props) => props.theme.colors.grey.grey1};
-    }
-    
-    .comments__date{
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 24px;
-        color: ${(props) => props.theme.colors.grey.grey3};
-    }
-    
-    .comments{
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 24px;
-        color: ${(props) => props.theme.colors.grey.grey2};
-    }
+    background-color: ${(props) => props.theme.colors.white};
+`
+
+export const Title = styled.h3`
+    color: ${(props) => props.theme.colors.grey1};
+    ${(props) => props.theme.typography.heading["heading-6-600"]}
+`
+
+export const CommentsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 24px;
+`
+
+export const Avatar = styled.span`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.random9};
+    border-radius: 15px;
+    width: 30px;
+    height: 30px;
+`
+
+export const Name = styled.span`
+    color: ${(props) => props.theme.colors.grey1};
+    ${(props) => props.theme.typography.text["body-2-500"]}
+`
+
+export const Date = styled.span`
+    color: ${(props) => props.theme.colors.grey3};
+`
+
+export const Comments = styled.p`
+    color: ${(props) => props.theme.colors.grey2};
+    ${(props ) => props.theme.typography.text["body-2-400"]}
 `
