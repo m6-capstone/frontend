@@ -65,7 +65,7 @@ export default function AdvertContent({handleCloseModal}:any) {
 
               <Input placeholder="45.000,00" type="text" label="Preço" register={{...register("price")}} error={errors.price?.message} />
               
-              <Input placeholder="Digitar descrição" type="text" label="Descrição" register={{...register("description")}} error={errors.description?.message} />
+              <Input placeholder="Digitar descrição" type="textArea" label="Descrição" register={{...register("description")}} error={errors.description?.message} />
             </>
           </InputContainer>
 
