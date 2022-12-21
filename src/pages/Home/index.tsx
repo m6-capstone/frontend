@@ -1,9 +1,18 @@
-import { Heading_1_700 } from "../../styles/GlobalStyle";
+import { CarrosselCarrosMotos } from "../../components/CarrosselCarrosMotos";
+import { CarrosselLeilão } from "../../components/CarrosselLeilão";
+import { Header } from "../../components/Header";
+import { Input } from "../../components/Input";
+import Welcome from "../../components/Welcome";
+import { mockCarros, mockMotos } from "../../mocks";
 
 export const Home = () => {
   return (
     <>
-      <Heading_1_700>Capstone M6</Heading_1_700>
+      <Header />
+      <Welcome />
+      <CarrosselLeilão />
+      <CarrosselCarrosMotos title="Carros" mock={mockCarros} />
+      <CarrosselCarrosMotos title="Motos" mock={mockMotos} />
     </>
   );
 };
