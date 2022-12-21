@@ -15,7 +15,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
     width?: string;
     defaultValue?: string;
     register: object;
-    error: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
+    error: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined | string;
     className?: string;
 }
 

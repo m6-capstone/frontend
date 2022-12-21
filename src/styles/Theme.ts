@@ -169,6 +169,13 @@ export const Theme: DefaultTheme = {
         "font-size": "14px",
         "line-height": "0px",
       },
+      "button-small-text": {
+        "font-family": "Inter",
+        "font-style": "normal",
+        "font-weight": "600",
+        "font-size": "12px",
+        "line-height": "0px",
+      },
       "input-placeholder": {
         "font-family": "Inter",
         "font-style": "normal",
