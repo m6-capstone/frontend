@@ -12,22 +12,25 @@ export const InputCurl = styled.div<Props>`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  .inputWrap__label {
+  .inputCurl__label {
     font-size: 14px;
     font-weight: 500;
     font-family: "Inter";
     color: var(--grey1);
   }
-  .inputWrap__input {
+
+  .inputCurl__input {
     padding: 0 16px 0 16px;
     width: 100%;
     height: ${({ type }) => (type === "textArea" ? "80px" : "48px")};
-    border: 1.5px solid var(--grey7);
+    /* border: 1.5px solid var(--grey7); */
+
     border-radius: 4px;
     color: var(--grey3);
     font-size: 16px;
     font-family: "Inter";
     font-weight: 400;
+
     ::placeholder {
       color: var(--grey3);
       font-size: 16px;
@@ -43,6 +46,7 @@ export const InputCurl = styled.div<Props>`
     }
   }
   .error {
-    border-color: red;
+    border-color: none;
   }
-`;
+;
+`
