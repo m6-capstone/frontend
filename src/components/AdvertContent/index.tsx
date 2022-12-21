@@ -110,3 +110,4 @@ export default function AdvertContent({handleCloseModal}:any) {
     </Container>
   )
 }
+/*  */

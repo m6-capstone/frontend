@@ -6,7 +6,7 @@ interface Props {
   modal: boolean, 
   handleCloseModal: () => void,
 }
-
+/*  */
 export default function modalCreatesAdvert({modal, handleCloseModal}:Props) {
   return (
     <>

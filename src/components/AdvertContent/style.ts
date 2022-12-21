@@ -19,7 +19,6 @@ export const AdvertHeader = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* padding: 16px 24px; */
 `
 
 export const HeaderTitle = styled.h3`
