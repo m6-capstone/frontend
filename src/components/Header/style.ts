@@ -22,10 +22,12 @@ export const ImgLogo = styled.img``;
 export const NavBar = styled.nav`
   display: flex;
   align-items: center;
-  gap: 44px;
+  gap: 20px;
   flex-direction: column;
 
   @media (min-width: 768px) {
+    gap: 44px;
+
     flex-direction: row;
   }
 `;
@@ -43,8 +45,12 @@ export const Menu = styled.ul`
   @media (min-width: 768px) {
     flex-direction: row;
     align-items: center;
-
+    gap: 20px;
     padding: unset;
+  }
+
+  @media (min-width: 1024px) {
+    gap: 44px;
   }
 `;
 
