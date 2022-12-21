@@ -4,7 +4,7 @@ import { Router } from "./routes";
 function App() {
   return (
     <>
-      <AdvertContent/>
+      <Router />
     </>
   );
 }
