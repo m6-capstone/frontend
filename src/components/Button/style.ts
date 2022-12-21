@@ -25,5 +25,6 @@ export const ButtonContainer = styled.button<IButtonContainer>`
 
   border-radius: 4px;
 
-  color: ${(p) => p.props.color && p.theme.colors[p.props.color]}
+  color: ${(p) => p.props.color && p.theme.colors[p.props.color]};
+
 `;

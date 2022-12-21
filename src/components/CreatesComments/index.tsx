@@ -9,13 +9,14 @@ export default function CreatesComments() {
             <Name>Daniel Josias</Name>
         </CommentsHeader>
 
-        <Comments placeholder="Carro muito confortável, foi uma ótima experiência de compra..." />
+        <Comments placeholder="Carro muito confortável, foi uma ótima experiência de compra..."></Comments>
         
         <Button content="Comentar" textStyle="button-medium-text" backgroundColor="brand1" color="white" width="70px"/>
        
         <RecomendationContainer>
-            <Recomendation>Gostei muito!</Recomendation>
-            <Recomendation>Incrível</Recomendation>
+          <Recomendation>Gostei muito!</Recomendation>
+          <Recomendation>Incrível</Recomendation>
+          <Recomendation>Recomendei para os meus amigos!</Recomendation>
         </RecomendationContainer>
     </Container>
   )
