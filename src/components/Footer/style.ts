@@ -7,7 +7,7 @@ export const FooterContainer = styled.footer`
   padding: 45px 0;
   align-items: center;
   gap: 60px;
-  background-color: ${(props) => props.theme.colors.grey.grey0};
+  background-color: ${(props) => props.theme.colors.grey0};
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -19,15 +19,19 @@ export const FooterContainer = styled.footer`
 export const Image = styled.img``;
 
 export const Span = styled.span`
-  color: ${(props) => props.theme.colors.grey.white};
+  color: ${(props) => props.theme.colors.white};
   ${(props) => props.theme.typography.text["body-2-400"]}
 `;
 
 export const Button = styled.button`
-  background-color: ${(props) => props.theme.colors.grey.grey1};
-  color: ${(props) => props.theme.colors.grey.white};
+  background-color: ${(props) => props.theme.colors.grey1};
+  color: ${(props) => props.theme.colors.white};
   width: 40px;
   height: 40px;
   border: none;
   border-radius: 5px 5px 5px 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

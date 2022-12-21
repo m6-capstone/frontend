@@ -1,5 +1,5 @@
 import { FooterContainer, Image, Span, Button } from "./style";
-import Logotipo from "../../assets/motors-shop.png";
+import Logotipo from "../../assets/logo-footer.svg";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 
 export default function Footer() {

@@ -1,5 +1,6 @@
 import { CarrosselCarrosMotos } from "../../components/CarrosselCarrosMotos";
 import { CarrosselLeilão } from "../../components/CarrosselLeilão";
+import Footer from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import Welcome from "../../components/Welcome";
@@ -13,6 +14,7 @@ export const Home = () => {
       <CarrosselLeilão />
       <CarrosselCarrosMotos title="Carros" mock={mockCarros} />
       <CarrosselCarrosMotos title="Motos" mock={mockMotos} />
+      <Footer />
     </>
   );
 };
