@@ -8,6 +8,13 @@ export const CarousselContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 38px 0;
+  gap: 38px;
+
+  @media (min-width: 768px) {
+    padding: 100px 0;
+    gap: 40px;
+  }
 `;
 
 export const CarousselTitle = styled.h2`
