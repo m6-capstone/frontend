@@ -47,6 +47,6 @@ export const InputCurl = styled.div<Props>`
   }
 
   .error {
-    border-color: red;
+    border-color: none;
   }
 `;
