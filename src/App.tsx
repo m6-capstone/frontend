@@ -1,11 +1,13 @@
-import Comments from "./components/Comments";
+import AdvertContent from "./components/AdvertContent";
+import CreatesComments from "./components/CreatesComments";
 import { Router } from "./routes";
 
 function App() {
   return (
     <>
       {/* <Router /> */}
-      <Comments/>
+      {/* <AdvertContent/> */}
+      <CreatesComments/>
     </>
   );
 }
