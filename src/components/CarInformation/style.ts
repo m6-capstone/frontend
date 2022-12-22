@@ -31,7 +31,7 @@ export const InfoConteiner = styled.div<IInfoConteiner>`
   width: 100%;
   margin-bottom: 24px;
   ${(p) =>
-    p.props.isDesktop ? "" : { gap: "32px", "flex-direction": "column" }}
+    p.props.isDesktop ? "" : { "gap": "32px", "flex-direction": "column" }}
 `;
 
 export const InfoConteinerYearMileage = styled.div`
