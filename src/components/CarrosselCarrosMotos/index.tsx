@@ -3,6 +3,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import {
+  ButtonWrapper,
   CarouselCars,
   CarouselCarsContainer,
   CarouselCarsImageContainer,
@@ -20,6 +21,8 @@ import {
   Tag,
   TagContainer,
 } from "./style";
+import { ICarrossel } from "../CarrosselLeilão";
+import { Button } from "../Button";
 
 interface ICarouselCarros {
   title: string;
@@ -32,9 +35,16 @@ interface ICarouselCarros {
     tags: string[];
     price: string;
   }[];
+  name: boolean;
+  adminView: boolean;
 }
 
-export const CarrosselCarrosMotos = ({ title, mock }: ICarouselCarros) => {
+export const CarrosselCarrosMotos = ({
+  title,
+  mock,
+  name,
+  adminView,
+}: ICarouselCarros) => {
   return (
     <CarouselCarsContainer>
       <CarouselTitle>{title}</CarouselTitle>
@@ -65,6 +75,22 @@ export const CarrosselCarrosMotos = ({ title, mock }: ICarouselCarros) => {
                     </TagContainer>
                     <Price>{car.price}</Price>
                   </InfoContainer>
+                  {adminView && (
+                    <ButtonWrapper>
+                      <Button
+                        textStyle="button-big-text"
+                        content="Editar"
+                        borderColor="grey1"
+                        color="grey1"
+                      />
+                      <Button
+                        textStyle="button-big-text"
+                        content="Ver como"
+                        borderColor="grey1"
+                        color="grey1"
+                      />
+                    </ButtonWrapper>
+                  )}
                 </CarouselCarsItemDeatils>
               </CarouselCarsItem>
             </SwiperSlide>

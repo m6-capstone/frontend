@@ -10,9 +10,19 @@ export const Home = () => {
     <>
       <Header />
       <Welcome />
-      <CarrosselLeilão />
-      <CarrosselCarrosMotos title="Carros" mock={mockCarros} />
-      <CarrosselCarrosMotos title="Motos" mock={mockMotos} />
+      <CarrosselLeilão name={true} adminView={false} />
+      <CarrosselCarrosMotos
+        title="Carros"
+        mock={mockCarros}
+        name={true}
+        adminView={false}
+      />
+      <CarrosselCarrosMotos
+        title="Motos"
+        mock={mockMotos}
+        name={true}
+        adminView={false}
+      />
       <Footer />
     </>
   );

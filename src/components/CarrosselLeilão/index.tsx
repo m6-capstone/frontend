@@ -27,11 +27,17 @@ import {
   Timer,
 } from "./style";
 import { carrosLeilao } from "../../mocks";
+import { Button } from "../Button";
 
-export const CarrosselLeilão = () => {
+export interface ICarrossel {
+  name: boolean;
+  adminView: boolean;
+}
+
+export const CarrosselLeilão = ({ name, adminView }: ICarrossel) => {
   return (
     <CarousselContainer>
-      <CarousselTitle>Leilão</CarousselTitle>
+      {name && <CarousselTitle>Leilão</CarousselTitle>}
       <Caroussel>
         <Swiper slidesPerView={"auto"} spaceBetween={24} className="mySwiper">
           {carrosLeilao.map((car, index) => (
@@ -64,8 +70,27 @@ export const CarrosselLeilão = () => {
                 </ItemDeatils>
               </CarousselItem>
               <ItemButton>
-                <span>Acessar página do leilão</span>
-                <MdArrowForward size="1.5em" />
+                {adminView ? (
+                  <>
+                    <Button
+                      textStyle="button-big-text"
+                      content="Editar"
+                      borderColor="grey10"
+                      color="grey10"
+                    />
+                    <Button
+                      textStyle="button-big-text"
+                      content="Ver"
+                      borderColor="grey10"
+                      color="grey10"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <span>Acessar página do leilão</span>
+                    <MdArrowForward size="1.5em" />
+                  </>
+                )}
               </ItemButton>
             </SwiperSlide>
           ))}
