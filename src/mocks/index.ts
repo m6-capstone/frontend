@@ -74,22 +74,22 @@ export const carrosLeilao = [
 
 export const mockCarros = [
   {
+    image: car6,
+    title: "Mercedes Benz A 200 CGI ADVANCE SEDAN",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
+    owner: "Carlos Lima",
+    iconColor: "random9",
+    tags: ["2019", "0 KM"],
+    price: "R$ 00.000,00",
+  },
+  {
     image: car3,
     title: "Mercedes Benz A 200 CGI ADVANCE SEDAN",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
     owner: "Julia Carla",
     iconColor: "random3",
-    tags: ["2019", "0 KM"],
-    price: "R$ 00.000,00",
-  },
-  {
-    image: car4,
-    title: "Mercedes Benz A 200 CGI ADVANCE SEDAN",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
-    owner: "Evelin Camila",
-    iconColor: "random12",
     tags: ["2019", "0 KM"],
     price: "R$ 00.000,00",
   },
@@ -124,32 +124,12 @@ export const mockCarros = [
     price: "R$ 00.000,00",
   },
   {
-    image: car4,
-    title: "Mercedes Benz A 200 CGI ADVANCE SEDAN",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
-    owner: "Evelin Camila",
-    iconColor: "random12",
-    tags: ["2019", "0 KM"],
-    price: "R$ 00.000,00",
-  },
-  {
     image: car5,
     title: "Mercedes Benz A 200 CGI ADVANCE SEDAN",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
     owner: "Samuel Leão",
     iconColor: "random5",
-    tags: ["2019", "0 KM"],
-    price: "R$ 00.000,00",
-  },
-  {
-    image: car6,
-    title: "Mercedes Benz A 200 CGI ADVANCE SEDAN",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
-    owner: "Carlos Lima",
-    iconColor: "random9",
     tags: ["2019", "0 KM"],
     price: "R$ 00.000,00",
   },
