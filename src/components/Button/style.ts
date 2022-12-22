@@ -27,4 +27,8 @@ export const ButtonContainer = styled.button<IButtonContainer>`
 
   color: ${(p) => p.props.color && p.theme.colors[p.props.color]};
 
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  
 `;

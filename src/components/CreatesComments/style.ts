@@ -32,14 +32,18 @@ export const Name = styled.div`
     ${(props) => props.theme.typography.text["body-2-500"]}
 `
 
-export const Comments = styled.textarea`
-    display: flex;
+export const CommentsContainer = styled.div`
+    position: relative;
     border: 1.5px solid ${(props) => props.theme.colors.grey7};
+`
+
+export const Comments = styled.textarea`
+    border: none;
     border-radius: 4px;
     height: 128px;
+    width: 100%;
     padding: 10px;
     resize: none;
-    max-width: 750px;
 
     &::placeholder{
         ${(props) => props.theme.typography.text["textarea-placeholder"]}

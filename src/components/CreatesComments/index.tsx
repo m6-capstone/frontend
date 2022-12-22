@@ -1,4 +1,4 @@
-import { Container, CommentsHeader, Initials, Name, Comments, RecomendationContainer, Recomendation } from "./style";
+import { Container, CommentsHeader, Initials, Name, CommentsContainer , Comments, RecomendationContainer, Recomendation } from "./style";
 import { Button } from "../Button";
 
 export default function CreatesComments() {
@@ -9,9 +9,16 @@ export default function CreatesComments() {
             <Name>Daniel Josias</Name>
         </CommentsHeader>
 
-        <Comments placeholder="Carro muito confortável, foi uma ótima experiência de compra..."></Comments>
-        
-        <Button content="Comentar" textStyle="button-medium-text" backgroundColor="brand1" color="white" width="70px"/>
+        <CommentsContainer>
+          <Comments placeholder="Carro muito confortável, foi uma ótima experiência de compra..."></Comments>
+          <Button 
+            content="Comentar"
+            textStyle="button-medium-text"
+            backgroundColor="brand1"
+            color="white"
+            width="70px"
+          />
+        </CommentsContainer>
        
         <RecomendationContainer>
           <Recomendation>Gostei muito!</Recomendation>
