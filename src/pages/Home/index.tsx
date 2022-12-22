@@ -2,7 +2,6 @@ import { CarrosselCarrosMotos } from "../../components/CarrosselCarrosMotos";
 import { CarrosselLeilão } from "../../components/CarrosselLeilão";
 import Footer from "../../components/Footer";
 import { Header } from "../../components/Header";
-import { Input } from "../../components/Input";
 import Welcome from "../../components/Welcome";
 import { mockCarros, mockMotos } from "../../mocks";
 
