@@ -21,7 +21,6 @@ import {
   Tag,
   TagContainer,
 } from "./style";
-import { ICarrossel } from "../CarrosselLeilão";
 import { Button } from "../Button";
 
 interface ICarouselCarros {
@@ -37,6 +36,7 @@ interface ICarouselCarros {
   }[];
   name: boolean;
   adminView: boolean;
+  refNav: React.MutableRefObject<null>;
 }
 
 export const CarrosselCarrosMotos = ({
@@ -44,9 +44,10 @@ export const CarrosselCarrosMotos = ({
   mock,
   name,
   adminView,
+  refNav,
 }: ICarouselCarros) => {
   return (
-    <CarouselCarsContainer>
+    <CarouselCarsContainer ref={refNav}>
       <CarouselTitle>{title}</CarouselTitle>
       <CarouselCars>
         <Swiper slidesPerView={"auto"} spaceBetween={24} className="mySwiper">

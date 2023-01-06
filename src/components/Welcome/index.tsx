@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   WelcomeContainer,
   TitleContainer,
@@ -7,6 +8,12 @@ import {
   Button,
 } from "./style";
 
+interface IWelcome {
+  refLeilao: React.MutableRefObject<null>;
+  refCarros: React.MutableRefObject<null>;
+  refMotos: React.MutableRefObject<null>;
+}
+
 export default function Welcome() {
   return (
     <WelcomeContainer>
@@ -15,8 +22,13 @@ export default function Welcome() {
         <Text>Um ambiente feito para você explorar o seu melhor</Text>
       </TitleContainer>
       <ButtonContainer>
-        <Button>Carros</Button>
-        <Button>Motos</Button>
+        <Link to="/home/carros">
+          <Button>Carros</Button>
+        </Link>
+
+        <Link to="/home/motos">
+          <Button>Motos</Button>
+        </Link>
       </ButtonContainer>
     </WelcomeContainer>
   );
