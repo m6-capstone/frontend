@@ -10,14 +10,21 @@ import Logo from "../../assets/motors-shop.svg";
 import { Button } from "../Button";
 import { useMediaQuery } from "usehooks-ts";
 import { MdMenu, MdClose } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MenuMobile } from "../MenuMobile";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { logout } from "../../store/User/User.store";
 
 export const Header = () => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { userInfo, isSuccess, isFinished } = useAppSelector(
+    (state) => state.user
+  );
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -40,16 +47,31 @@ export const Header = () => {
                 <HeaderItem>Leilão</HeaderItem>
               </Link>
               <Bar />
-              <Link to="/login">
-                <HeaderItem>Fazer Login</HeaderItem>
-              </Link>
-              <Link to="/register">
-                <Button
-                  textStyle="button-big-text"
-                  content="Cadastrar"
-                  borderColor="grey4"
-                />
-              </Link>
+              {isFinished && isSuccess && userInfo !== null ? (
+                <>
+                  <HeaderItem>{userInfo.name}</HeaderItem>
+                  <Button
+                    textStyle="button-big-text"
+                    content="Logout"
+                    borderColor="alert1"
+                    color="alert1"
+                    onClick={() => dispatch(logout())}
+                  />
+                </>
+              ) : (
+                <>
+                  <Link to="/login">
+                    <HeaderItem>Fazer Login</HeaderItem>
+                  </Link>
+                  <Link to="/register">
+                    <Button
+                      textStyle="button-big-text"
+                      content="Cadastrar"
+                      borderColor="grey4"
+                    />
+                  </Link>
+                </>
+              )}
             </Menu>
           </NavBar>
         ) : (

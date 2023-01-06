@@ -22,6 +22,9 @@ import {
   TagContainer,
 } from "./style";
 import { Button } from "../Button";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useEffect } from "react";
+import { getUser } from "../../store/User/getUser";
 
 interface ICarouselCarros {
   title: string;
@@ -46,57 +49,71 @@ export const CarrosselCarrosMotos = ({
   adminView,
   refNav,
 }: ICarouselCarros) => {
+  const dispatch = useAppDispatch();
+  const { userToken } = useAppSelector((state) => state.user);
+  const { userInfo } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    if (userToken) {
+      dispatch(getUser({ userToken }));
+    }
+  }, []);
+
   return (
     <CarouselCarsContainer ref={refNav}>
       <CarouselTitle>{title}</CarouselTitle>
       <CarouselCars>
-        <Swiper slidesPerView={"auto"} spaceBetween={24} className="mySwiper">
-          {mock.map((car, index) => (
-            <SwiperSlide key={index}>
-              <CarouselCarsItem>
-                <CarouselCarsImageContainer>
-                  <CarouselCarsItemImage src={car.image} />
-                </CarouselCarsImageContainer>
-                <CarouselCarsItemDeatils>
-                  <CarouselCarsItemTitle>{car.title}</CarouselCarsItemTitle>
-                  <CarouselCarsItemDescription>
-                    {car.description}
-                  </CarouselCarsItemDescription>
-                  <OwnerContainer>
-                    <OwnerIcon backgroundColor={car.iconColor}>
-                      {car.owner[0]}
-                    </OwnerIcon>
-                    <OwnerName>{car.owner}</OwnerName>
-                  </OwnerContainer>
-                  <InfoContainer>
-                    <TagContainer>
-                      {car.tags.map((tag, index) => (
-                        <Tag key={index}>{tag}</Tag>
-                      ))}
-                    </TagContainer>
-                    <Price>{car.price}</Price>
-                  </InfoContainer>
-                  {adminView && (
-                    <ButtonWrapper>
-                      <Button
-                        textStyle="button-big-text"
-                        content="Editar"
-                        borderColor="grey1"
-                        color="grey1"
-                      />
-                      <Button
-                        textStyle="button-big-text"
-                        content="Ver como"
-                        borderColor="grey1"
-                        color="grey1"
-                      />
-                    </ButtonWrapper>
-                  )}
-                </CarouselCarsItemDeatils>
-              </CarouselCarsItem>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {userInfo?.adverts.length === 0 ? (
+          <CarouselTitle>Sem leilões</CarouselTitle>
+        ) : (
+          <Swiper slidesPerView={"auto"} spaceBetween={24} className="mySwiper">
+            {mock.map((car, index) => (
+              <SwiperSlide key={index}>
+                <CarouselCarsItem>
+                  <CarouselCarsImageContainer>
+                    <CarouselCarsItemImage src={car.image} />
+                  </CarouselCarsImageContainer>
+                  <CarouselCarsItemDeatils>
+                    <CarouselCarsItemTitle>{car.title}</CarouselCarsItemTitle>
+                    <CarouselCarsItemDescription>
+                      {car.description}
+                    </CarouselCarsItemDescription>
+                    <OwnerContainer>
+                      <OwnerIcon backgroundColor={car.iconColor}>
+                        {car.owner[0]}
+                      </OwnerIcon>
+                      <OwnerName>{car.owner}</OwnerName>
+                    </OwnerContainer>
+                    <InfoContainer>
+                      <TagContainer>
+                        {car.tags.map((tag, index) => (
+                          <Tag key={index}>{tag}</Tag>
+                        ))}
+                      </TagContainer>
+                      <Price>{car.price}</Price>
+                    </InfoContainer>
+                    {adminView && (
+                      <ButtonWrapper>
+                        <Button
+                          textStyle="button-big-text"
+                          content="Editar"
+                          borderColor="grey1"
+                          color="grey1"
+                        />
+                        <Button
+                          textStyle="button-big-text"
+                          content="Ver como"
+                          borderColor="grey1"
+                          color="grey1"
+                        />
+                      </ButtonWrapper>
+                    )}
+                  </CarouselCarsItemDeatils>
+                </CarouselCarsItem>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </CarouselCars>
     </CarouselCarsContainer>
   );

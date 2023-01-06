@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useScreen } from "usehooks-ts";
-import { openModalCreateAdvert } from "../../store/ModalCreateAdvert.store";
 import { Button } from "../Button";
 import { ModalComponent } from "../Modal";
 import {
@@ -17,13 +16,14 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import ModalCreatesAdvert from "../ModalCreatesAdvert";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 export const ProfileAdmin = () => {
-  const isModalOpen = useSelector(
-    (state: RootState) => state.modalCreateAdvert.isOpen
-  );
-
   const [modal, setModal] = useState(false);
+  const { userInfo } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+
+  console.log(userInfo);
 
   return (
     <>
@@ -33,14 +33,12 @@ export const ProfileAdmin = () => {
         <Profile>
           <Icon>SL</Icon>
           <TitleWrapper>
-            <ProfileTitle>Samuel Leão</ProfileTitle>
-            <ProfileTag>Anunciante</ProfileTag>
+            <ProfileTitle>{userInfo?.name}</ProfileTitle>
+            <ProfileTag>
+              {userInfo?.isSeller ? "Anunciante" : "Comprador"}
+            </ProfileTag>
           </TitleWrapper>
-          <ProfileDescription>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s
-          </ProfileDescription>
+          <ProfileDescription>{userInfo?.description}</ProfileDescription>
           <Button
             textStyle="button-big-text"
             content="Criar anúncio"

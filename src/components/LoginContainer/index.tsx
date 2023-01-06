@@ -1,4 +1,10 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { getUser } from "../../store/User/getUser";
+import { userLogin } from "../../store/User/loginUser";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import {
@@ -19,19 +25,39 @@ export const LoginContainer = () => {
     formState: { errors },
   } = useForm();
 
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { isSuccess, isError, isFinished } = useAppSelector(
+    (state) => state.user
+  );
+
+  const onFinish = async (data: any) => {
+    await dispatch(userLogin({ email: data.email, password: data.password }));
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Sucesso!");
+      navigate("/");
+    }
+    if (isError) {
+      toast.error("Erro!");
+    }
+  }, [isFinished]);
+
   return (
     <>
       <LoginWrapper>
         <LoginDiv>
           <LoginTitle>Login</LoginTitle>
           <LoginContent>
-            <LoginForm>
+            <LoginForm onSubmit={handleSubmit(onFinish)}>
               <Input
                 placeholder="Digitar usuário"
-                type="text"
+                type="email"
                 label="Usuário"
-                register={{ ...register("user") }}
-                error={errors.user?.message}
+                register={{ ...register("email") }}
+                error={errors.email?.message}
               />
               <LoginPasswordContainer>
                 <Input
