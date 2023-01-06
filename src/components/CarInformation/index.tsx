@@ -27,7 +27,7 @@ export default function CarInformation() {
         textStyle="button-medium-text"
         color="white"
         backgroundColor="brand1"
-        content="Comparar"
+        content="Comprar"
         borderColor="brand1"
         height="38px"
         width="100px"

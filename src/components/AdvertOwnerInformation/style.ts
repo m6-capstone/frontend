@@ -11,9 +11,17 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 36px 44px;
-  gap: 32px;
+  padding: 40px 28px;
+  gap: 28px;
+
+  border-radius: 4px;
+
   background-color: ${(props) => props.theme.colors.grey10};
+
+  button {
+    white-space: normal;
+    word-wrap: break-word;
+  }
 `;
 export const Name = styled.h3`
   color: ${(props) => props.theme.colors.grey1};

@@ -4,41 +4,41 @@ import { BlueBackground, Profile } from "../../components/ProfileAdmin/style";
 import CarInformation from "../../components/CarInformation";
 import Description from "../../components/Description";
 import Comments from "../../components/Comments";
-import ProductImage from '../../components/ProductImage'
+import ProductImage from "../../components/ProductImage";
 import ListImages from "../../components/ListImages";
 import CreatesComments from "../../components/CreatesComments";
 import { GlobalContainer, Container, Main, Aside } from "./styles";
 import Footer from "../../components/Footer";
-import { useMediaQuery } from "usehooks-ts"; 
+import { useMediaQuery } from "usehooks-ts";
 
 export const Product = () => {
   const isMobile = useMediaQuery("(min-width: 375px)");
-  const isDesktop = useMediaQuery("(min-width: 1360px)");
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (
     <>
-      <Header/>
+      <Header />
       <GlobalContainer>
         <Main>
-          <ProductImage/>
+          <ProductImage />
           <CarInformation />
           <Description />
 
-          <Container props={{isDesktop}}>
-            <ListImages/>
+          <Container props={{ isDesktop }}>
+            <ListImages />
             <AdvertOwnerInformation />
           </Container>
 
           <Comments />
-          <CreatesComments/>
+          <CreatesComments />
         </Main>
 
-        <Aside props={{isMobile,isDesktop}}>
-          <ListImages/>
+        <Aside props={{ isMobile, isDesktop }}>
+          <ListImages />
           <AdvertOwnerInformation />
         </Aside>
-      </GlobalContainer>           
-      <Footer/>
+      </GlobalContainer>
+      <Footer />
     </>
   );
 };

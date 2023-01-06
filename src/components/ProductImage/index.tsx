@@ -1,5 +1,5 @@
-import { Container, Image } from './styles'
-import car from '../../assets/cars/car1.svg'
+import { Container, Image, ImageWrapper } from "./styles";
+import car from "../../assets/cars/car1.svg";
 import { useMediaQuery } from "usehooks-ts";
 
 export default function ProductImage() {
@@ -7,7 +7,9 @@ export default function ProductImage() {
 
   return (
     <Container>
-        <Image src={car} alt='imagem do produto' props={{isTablet}}/>
+      <ImageWrapper>
+        <Image src={car} alt="imagem do produto" props={{ isTablet }} />
+      </ImageWrapper>
     </Container>
-  )
+  );
 }
