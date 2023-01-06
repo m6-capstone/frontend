@@ -1,4 +1,7 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../hooks";
+import { registerUser } from "../../store/User/registerUser";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import {
@@ -17,19 +20,38 @@ export const RegisterContainer = () => {
     formState: { errors },
   } = useForm();
 
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const onFinish = (data: any) => {
+    dispatch(
+      registerUser({
+        name: data.name,
+        email: data.email,
+        cellphone: data.cellphone,
+        birthdate: data.birthdate,
+        description: data.description,
+        cpf: data.cpf,
+        password: data.password,
+        isSeller: true,
+      })
+    );
+    navigate("/");
+  };
+
   return (
     <>
       <RegisterWrapper>
         <RegisterDiv>
           <RegisterTitle>Registro</RegisterTitle>
-          <RegisterForm>
+          <RegisterForm onSubmit={handleSubmit(onFinish)}>
             <RegisterFormLabel>Infomações pessoais</RegisterFormLabel>
             <Input
               placeholder="Ex: Samuel Leão"
               type="text"
               label="Nome"
-              register={{ ...register("user") }}
-              error={errors.user?.message}
+              register={{ ...register("name") }}
+              error={errors.name?.message}
             />
             <Input
               placeholder="Ex: samuel@kenzie.com.br"
@@ -49,8 +71,8 @@ export const RegisterContainer = () => {
               placeholder="(DDD) 90000-0000"
               type="phone"
               label="Celular"
-              register={{ ...register("phone") }}
-              error={errors.phone?.message}
+              register={{ ...register("cellphone") }}
+              error={errors.cellphone?.message}
             />
             <Input
               placeholder="00/00/00"

@@ -1,14 +1,17 @@
 import { useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CarrosselCarrosMotos } from "../../components/CarrosselCarrosMotos";
 import { CarrosselLeilão } from "../../components/CarrosselLeilão";
 import Footer from "../../components/Footer";
 import { Header } from "../../components/Header";
 import Welcome from "../../components/Welcome";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { mockCarros, mockMotos } from "../../mocks";
+import { getUser } from "../../store/User/getUser";
 
 export const Home = () => {
-  useEffect(() => {}, []);
+  const dispatch = useAppDispatch();
 
   const refCarros = useRef(null);
   const refMotos = useRef(null);
@@ -34,6 +37,14 @@ export const Home = () => {
       handleScroll(refLeilao.current);
     }
   }, [element]);
+
+  const { userToken } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    if (userToken) {
+      dispatch(getUser({ userToken }));
+    }
+  }, []);
 
   return (
     <>

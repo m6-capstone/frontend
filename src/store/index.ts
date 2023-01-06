@@ -1,10 +1,8 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { accountsReducer } from "./Accounts.store";
-import { modalCreateAdvertReducer } from "./ModalCreateAdvert.store";
+import { userReducer } from "./User/User.store";
 
 const rootReducer = combineReducers({
-  modalCreateAdvert: modalCreateAdvertReducer,
-  accounts: accountsReducer,
+  user: userReducer,
 });
 
 const store = configureStore({
@@ -17,3 +15,5 @@ const store = configureStore({
 
 export type RootState = ReturnType<typeof rootReducer>;
 export default store;
+
+export type AppDispatch = typeof store.dispatch;
