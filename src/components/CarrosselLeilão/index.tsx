@@ -32,11 +32,12 @@ import { Button } from "../Button";
 export interface ICarrossel {
   name: boolean;
   adminView: boolean;
+  refNav: React.MutableRefObject<null>;
 }
 
-export const CarrosselLeilão = ({ name, adminView }: ICarrossel) => {
+export const CarrosselLeilão = ({ name, adminView, refNav }: ICarrossel) => {
   return (
-    <CarousselContainer>
+    <CarousselContainer ref={refNav}>
       {name && <CarousselTitle>Leilão</CarousselTitle>}
       <Caroussel>
         <Swiper slidesPerView={"auto"} spaceBetween={24} className="mySwiper">

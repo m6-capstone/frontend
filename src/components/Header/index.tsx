@@ -12,6 +12,7 @@ import { useMediaQuery } from "usehooks-ts";
 import { MdMenu, MdClose } from "react-icons/md";
 import { useState } from "react";
 import { MenuMobile } from "../MenuMobile";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -21,20 +22,34 @@ export const Header = () => {
   return (
     <>
       <HeaderContainer>
-        <ImgLogo src={Logo} />
+        <Link to="/home">
+          <ImgLogo src={Logo} />
+        </Link>
         {isDesktop ? (
           <NavBar>
             <Menu>
-              <HeaderItem>Carros</HeaderItem>
-              <HeaderItem>Motos</HeaderItem>
-              <HeaderItem>Leilão</HeaderItem>
+              <Link to="/home/carros">
+                <HeaderItem>Carros</HeaderItem>
+              </Link>
+
+              <Link to="/home/motos">
+                <HeaderItem>Motos</HeaderItem>
+              </Link>
+
+              <Link to="/home/leilao">
+                <HeaderItem>Leilão</HeaderItem>
+              </Link>
               <Bar />
-              <HeaderItem>Fazer Login</HeaderItem>
-              <Button
-                textStyle="button-big-text"
-                content="Cadastrar"
-                borderColor="grey4"
-              />
+              <Link to="/login">
+                <HeaderItem>Fazer Login</HeaderItem>
+              </Link>
+              <Link to="/register">
+                <Button
+                  textStyle="button-big-text"
+                  content="Cadastrar"
+                  borderColor="grey4"
+                />
+              </Link>
             </Menu>
           </NavBar>
         ) : (
