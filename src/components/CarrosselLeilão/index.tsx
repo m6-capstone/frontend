@@ -32,7 +32,7 @@ import { Button } from "../Button";
 export interface ICarrossel {
   name: boolean;
   adminView: boolean;
-  refNav: React.MutableRefObject<null>;
+  refNav?: React.MutableRefObject<null>;
 }
 
 export const CarrosselLeilão = ({ name, adminView, refNav }: ICarrossel) => {
