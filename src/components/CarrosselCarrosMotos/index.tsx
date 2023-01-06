@@ -36,7 +36,7 @@ interface ICarouselCarros {
   }[];
   name: boolean;
   adminView: boolean;
-  refNav: React.MutableRefObject<null>;
+  refNav?: React.MutableRefObject<null>;
 }
 
 export const CarrosselCarrosMotos = ({
