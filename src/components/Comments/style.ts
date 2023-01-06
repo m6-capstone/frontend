@@ -7,6 +7,17 @@ export const Container = styled.div`
   padding: 36px 28px;
   gap: 24px;
   background-color: ${(props) => props.theme.colors.white};
+
+  position: relative;
+  top: -50px;
+  min-width: 350px;
+  width: 93.5%;
+  border-radius: 4px;
+
+  @media (min-width: 768px) {
+    position: unset;
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h3`

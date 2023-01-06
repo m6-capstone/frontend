@@ -7,14 +7,14 @@ export default function AdvertOwnerInformation() {
 
   return (
     <Container>
-      <Initials props={{isDesktop}}>SL</Initials>
+      <Initials props={{ isDesktop }}>SL</Initials>
       <Name>Samuel Leão</Name>
       <Text>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's
       </Text>
       <Button
-        content="Ver todo anuncios"
+        content="Ver todos anúncios"
         textStyle="button-big-text"
         color="white"
         backgroundColor="grey0"
