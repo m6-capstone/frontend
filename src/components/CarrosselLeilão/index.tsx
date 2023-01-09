@@ -3,7 +3,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import clock from "../../assets/clock.svg";
-import { MdArrowForward } from "react-icons/md";
+import { StyledArrowIcon } from "./style";
 
 import {
   Caroussel,
@@ -65,7 +65,7 @@ export const CarrosselLeilão = () => {
               </CarousselItem>
               <ItemButton>
                 <span>Acessar página do leilão</span>
-                <MdArrowForward size="1.5em" />
+                <StyledArrowIcon size="1.5em" />
               </ItemButton>
             </SwiperSlide>
           ))}

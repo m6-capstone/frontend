@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BsArrowRight } from "react-icons/bs";
 
 interface IIconColor {
   backgroundColor: string;
@@ -189,5 +190,12 @@ export const Price = styled.span`
   ${(props) => props.theme.typography.heading["heading-7-500"]}
 `;
 
+export const StyledArrowIcon = styled(BsArrowRight)`
+  transition: 0.5s;
+
+  &:hover {
+    transform: translateX(10px);
+  }
+`;
 
 
