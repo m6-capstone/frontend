@@ -34,6 +34,7 @@ export const Image = styled.img`
   height: 90px;
   background-color: ${(props) => props.theme.colors.grey7};
   border-radius: 4px;
+  cursor: pointer;
 
   @media (min-width: 768px) {
     width: 100%;
