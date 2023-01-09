@@ -65,6 +65,8 @@ export const Button = styled.button`
   box-sizing: border-box;
 
   &:hover {
+    background-color: ${(props) => props.theme.colors.grey10};
+    color: ${(props) => props.theme.colors.grey0};
     cursor: pointer;
   }
 

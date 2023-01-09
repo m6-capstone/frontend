@@ -45,14 +45,17 @@ export const Caroussel = styled.div`
     height: 100%;
   }
 `;
-
 export const CarousselItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
-`;
+  transition: 0.8s; 
 
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+`;
 export const ItemImage = styled.img`
   position: absolute;
   z-index: -9999;
@@ -185,3 +188,6 @@ export const Price = styled.span`
   color: ${(props) => props.theme.colors.white};
   ${(props) => props.theme.typography.heading["heading-7-500"]}
 `;
+
+
+
