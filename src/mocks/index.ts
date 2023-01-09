@@ -74,6 +74,7 @@ export const carrosLeilao = [
 
 export const mockCarros = [
   {
+    id: 1,
     image: car3,
     title: "Mercedes Benz A 200 CGI ADVANCE SEDAN",
     description:
@@ -84,6 +85,7 @@ export const mockCarros = [
     price: "R$ 00.000,00",
   },
   {
+    id: 2,
     image: car4,
     title: "Mercedes Benz A 200 CGI ADVANCE SEDAN",
     description:
@@ -94,6 +96,7 @@ export const mockCarros = [
     price: "R$ 00.000,00",
   },
   {
+    id: 3,
     image: car5,
     title: "Mercedes Benz A 200 CGI ADVANCE SEDAN",
     description:
@@ -104,6 +107,7 @@ export const mockCarros = [
     price: "R$ 00.000,00",
   },
   {
+    id: 4,
     image: car6,
     title: "Mercedes Benz A 200 CGI ADVANCE SEDAN",
     description:
@@ -114,6 +118,7 @@ export const mockCarros = [
     price: "R$ 00.000,00",
   },
   {
+    id: 5,
     image: car3,
     title: "Mercedes Benz A 200 CGI ADVANCE SEDAN",
     description:
@@ -124,6 +129,7 @@ export const mockCarros = [
     price: "R$ 00.000,00",
   },
   {
+    id: 6,
     image: car4,
     title: "Mercedes Benz A 200 CGI ADVANCE SEDAN",
     description:
@@ -217,3 +223,5 @@ export const mockMotos = [
     price: "R$ 00.000,00",
   },
 ];
+
+
