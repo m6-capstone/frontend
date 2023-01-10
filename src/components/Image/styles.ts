@@ -48,5 +48,4 @@ export const Wrapper = styled.div`
 export const Image = styled.img`
     width: 380px;
     height: 125px;
-    
 `

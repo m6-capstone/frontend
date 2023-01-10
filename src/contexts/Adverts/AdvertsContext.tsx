@@ -23,6 +23,7 @@ const initialValue = {
   isFetching: false,
   isEmpty: false,
   isLoaded: false,
+  isSuccess: false,
   getAdvertList: () => {},
   createAdvert: () => {},
   setAdvertsList: () => {},
@@ -37,7 +38,10 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
   const [advertsList, setAdvertsList] = useState(initialValue.advertsList);
   const [isEmpty, setIsEmpty] = useState(initialValue.isEmpty);
   const [isLoaded, setIsLoaded] = useState(initialValue.isLoaded);
+  const [isSuccess, setIsSuccess] = useState(initialValue.isSuccess);
   const [isFetching, setIsFetching] = useState(initialValue.isFetching);
+
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzMzNjYyMDUsImV4cCI6MTY3MzQ1MjYwNSwic3ViIjoiNmIzZDZmMDQtNWMxZC00M2E5LWE5NjQtOTgyNTY2MDc0OGVkIn0.8Y41UHPQ-dAlkYyMQnUlGhWjSaqiw3VMW8hNQRtUw4g"
 
   const getAdvertList = async () => {
     setIsFetching(true);
@@ -59,8 +63,13 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
   };
 
   const createAdvert = async (data: IAdvert) => {
-    await api
-      .post(`adverts`, data)
+    const config = {
+      headers:{
+        "Content-Type":"application/json",
+      },
+      authorization: token
+    }
+    await api.post(`adverts`,data,config)
       .then(async (res) => {
         console.log(res.data);
 
@@ -94,6 +103,7 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
         advertData,
         isEmpty,
         isLoaded,
+        isSuccess,
         isFetching,
         getAdvertList,
         createAdvert,

@@ -52,6 +52,7 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
     await api
       .post(`login`, { email, password })
       .then(async (res) => {
+        console.log(res.data)
         await saveToken(res.data.token);
         await getUser(res.data.token);
 

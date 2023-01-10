@@ -26,6 +26,7 @@ export interface AdvertsContextType {
   advertsList: IAdvert[];
   isEmpty: boolean;
   isLoaded: boolean;
+  isSuccess: boolean;
   isFetching: boolean;
 
   getAdvertList: () => void;
