@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useScreen } from "usehooks-ts";
 import { Button } from "../Button";
 import { ModalComponent } from "../Modal";
@@ -14,16 +14,14 @@ import {
   TitleWrapper,
 } from "./style";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
 import ModalCreatesAdvert from "../ModalCreatesAdvert";
 import { useAppDispatch, useAppSelector } from "../../hooks";
+import { UserContext } from "../../contexts/User/UserContext";
 
 export const ProfileAdmin = () => {
   const [modal, setModal] = useState(false);
-  const { userInfo } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
 
-  console.log(userInfo);
+  const { userData, userLogout, isLoggedIn } = useContext(UserContext);
 
   return (
     <>
@@ -33,12 +31,12 @@ export const ProfileAdmin = () => {
         <Profile>
           <Icon>SL</Icon>
           <TitleWrapper>
-            <ProfileTitle>{userInfo?.name}</ProfileTitle>
+            <ProfileTitle>{userData?.name}</ProfileTitle>
             <ProfileTag>
-              {userInfo?.isSeller ? "Anunciante" : "Comprador"}
+              {userData?.isSeller ? "Anunciante" : "Comprador"}
             </ProfileTag>
           </TitleWrapper>
-          <ProfileDescription>{userInfo?.description}</ProfileDescription>
+          <ProfileDescription>{userData?.description}</ProfileDescription>
           <Button
             textStyle="button-big-text"
             content="Criar anúncio"

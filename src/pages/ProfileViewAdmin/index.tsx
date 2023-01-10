@@ -1,23 +1,33 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CarrosselCarrosMotos } from "../../components/CarrosselCarrosMotos";
 import { CarrosselLeilão } from "../../components/CarrosselLeilão";
 import Footer from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { ProfileAdmin } from "../../components/ProfileAdmin";
+import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
+import { UserContext } from "../../contexts/User/UserContext";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { mockCarros, mockMotos } from "../../mocks";
 import { getUser } from "../../store/User/getUser";
 import { ContentWrapper } from "./style";
 
 export const ProfileViewAdmin = () => {
-  const dispatch = useAppDispatch();
-  const { userToken } = useAppSelector((state) => state.user);
+  const { autoLogin, isLoggedIn } = useContext(UserContext);
+  const { advertsList, getAdvertList, isLoaded, isEmpty } =
+    useContext(AdvertsContext);
 
   useEffect(() => {
-    if (userToken) {
-      dispatch(getUser({ userToken }));
+    console.log(isLoggedIn);
+    if (!isLoggedIn) {
+      autoLogin();
+      getAdvertList();
     }
+    console.log(advertsList);
   }, []);
+
+  useEffect(() => {
+    console.log(isEmpty);
+  }, [advertsList]);
 
   return (
     <>
@@ -25,18 +35,13 @@ export const ProfileViewAdmin = () => {
       <ContentWrapper>
         <ProfileAdmin />
         <CarrosselLeilão name={false} adminView={true} />
-        <CarrosselCarrosMotos
-          title="Carros"
-          mock={mockCarros}
-          name={true}
-          adminView={true}
-        />
-        <CarrosselCarrosMotos
-          title="Motos"
-          mock={mockMotos}
-          name={true}
-          adminView={true}
-        />
+        {isLoaded && (
+          <>
+            <CarrosselCarrosMotos title="Carros" name={true} adminView={true} />
+            <CarrosselCarrosMotos title="Motos" name={true} adminView={true} />
+          </>
+        )}
+
         <Footer />
       </ContentWrapper>
     </>

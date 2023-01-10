@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CarrosselCarrosMotos } from "../../components/CarrosselCarrosMotos";
@@ -6,12 +6,11 @@ import { CarrosselLeilão } from "../../components/CarrosselLeilão";
 import Footer from "../../components/Footer";
 import { Header } from "../../components/Header";
 import Welcome from "../../components/Welcome";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { UserContext } from "../../contexts/User/UserContext";
 import { mockCarros, mockMotos } from "../../mocks";
-import { getUser } from "../../store/User/getUser";
 
 export const Home = () => {
-  const dispatch = useAppDispatch();
+  const { isLoggedIn, autoLogin, userData } = useContext(UserContext);
 
   const refCarros = useRef(null);
   const refMotos = useRef(null);
@@ -28,7 +27,6 @@ export const Home = () => {
   let { element } = useParams();
 
   useEffect(() => {
-    console.log(element);
     if (element === "carros") {
       handleScroll(refCarros.current);
     } else if (element === "motos") {
@@ -38,13 +36,16 @@ export const Home = () => {
     }
   }, [element]);
 
-  const { userToken } = useAppSelector((state) => state.user);
-
   useEffect(() => {
-    if (userToken) {
-      dispatch(getUser({ userToken }));
+    console.log(isLoggedIn);
+    if (!isLoggedIn) {
+      autoLogin();
     }
   }, []);
+
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   return (
     <>
@@ -54,14 +55,12 @@ export const Home = () => {
       <CarrosselCarrosMotos
         refNav={refCarros}
         title="Carros"
-        mock={mockCarros}
         name={true}
         adminView={false}
       />
       <CarrosselCarrosMotos
         refNav={refMotos}
         title="Motos"
-        mock={mockMotos}
         name={true}
         adminView={false}
       />
