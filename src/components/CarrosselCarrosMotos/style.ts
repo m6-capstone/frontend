@@ -56,12 +56,19 @@ export const CarouselCarsImageContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  &:hover {
+    border: 3px solid ${(props) => props.theme.colors.brand2};
+  }
 `;
 
 export const CarouselCarsItemImage = styled.img`
   height: 100%;
   width: 84%;
   max-width: 100%;
+  &:hover {
+    transform: scale(1.2);
+    transition: transform 0.5s ease-in-out;
+  }
 `;
 
 export const CarouselCarsItemDeatils = styled.div`

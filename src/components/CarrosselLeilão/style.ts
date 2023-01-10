@@ -51,7 +51,7 @@ export const CarousselItem = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-  transition: 0.8s; 
+  transition: 0.8s;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.6);
@@ -193,9 +193,7 @@ export const Price = styled.span`
 export const StyledArrowIcon = styled(BsArrowRight)`
   transition: 0.5s;
 
-  &:hover {
+  .swiper-slide:hover & {
     transform: translateX(10px);
   }
 `;
-
-
