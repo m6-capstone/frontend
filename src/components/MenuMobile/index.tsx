@@ -1,13 +1,13 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { logout } from "../../store/User/User.store";
+import { UserContext } from "../../contexts/User/UserContext";
 import { Button } from "../Button";
 import { HeaderItem, Menu } from "../Header/style";
 import { MenuMobileContainer, MobileSeparator } from "./style";
 
 export const MenuMobile = () => {
-  const { userInfo } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
+  const { userData, isLoggedIn, userLogout } = useContext(UserContext);
+
   return (
     <>
       <MenuMobileContainer>
@@ -24,15 +24,19 @@ export const MenuMobile = () => {
         </Menu>
         <MobileSeparator />
         <Menu>
-          {userInfo ? (
+          {isLoggedIn ? (
             <>
-              <HeaderItem>{userInfo.name}</HeaderItem>
+              <Link to="/profileviewadmin">
+                <HeaderItem>{userData.name}</HeaderItem>
+              </Link>
               <Button
                 textStyle="button-big-text"
                 content="Logout"
                 borderColor="alert1"
                 color="alert1"
-                onClick={() => dispatch(logout())}
+                onClick={() => {
+                  userLogout();
+                }}
               />
             </>
           ) : (

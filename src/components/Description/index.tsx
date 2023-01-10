@@ -1,15 +1,14 @@
+import { useContext } from "react";
+import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
 import { Container, Subtitle, Text } from "./style";
 
 export default function Description() {
+  const { advertData } = useContext(AdvertsContext);
+
   return (
     <Container>
       <Subtitle>Descrição</Subtitle>
-      <Text>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
-      </Text>
+      <Text>{advertData.description}</Text>
     </Container>
   );
 }

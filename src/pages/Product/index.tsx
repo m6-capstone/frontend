@@ -10,34 +10,59 @@ import CreatesComments from "../../components/CreatesComments";
 import { GlobalContainer, Container, Main, Aside } from "./styles";
 import Footer from "../../components/Footer";
 import { useMediaQuery } from "usehooks-ts";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../contexts/User/UserContext";
+import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
+import { useParams } from "react-router-dom";
 
 export const Product = () => {
   const isMobile = useMediaQuery("(min-width: 375px)");
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
+  const { autoLogin, isLoggedIn } = useContext(UserContext);
+
+  useEffect(() => {
+    console.log(isLoggedIn);
+    if (!isLoggedIn) {
+      autoLogin();
+    }
+  }, []);
+
+  const { findCarById, advertData, isFetching } = useContext(AdvertsContext);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (id) {
+      findCarById(id);
+    }
+  }, []);
+
   return (
     <>
       <Header />
-      <GlobalContainer>
-        <Main>
-          <ProductImage />
-          <CarInformation />
-          <Description />
+      {!isFetching && (
+        <GlobalContainer>
+          <Main>
+            <ProductImage />
+            <CarInformation />
+            <Description />
 
-          <Container props={{ isDesktop }}>
+            <Container props={{ isDesktop }}>
+              <ListImages />
+              <AdvertOwnerInformation />
+            </Container>
+
+            <Comments />
+            <CreatesComments />
+          </Main>
+
+          <Aside props={{ isMobile, isDesktop }}>
             <ListImages />
             <AdvertOwnerInformation />
-          </Container>
-
-          <Comments />
-          <CreatesComments />
-        </Main>
-
-        <Aside props={{ isMobile, isDesktop }}>
-          <ListImages />
-          <AdvertOwnerInformation />
-        </Aside>
-      </GlobalContainer>
+          </Aside>
+        </GlobalContainer>
+      )}
       <Footer />
     </>
   );

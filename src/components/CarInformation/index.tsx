@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
 import { Button } from "../Button";
 import {
   Container,
@@ -12,16 +14,16 @@ import {
 export default function CarInformation() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
+  const { advertData } = useContext(AdvertsContext);
+
   return (
     <Container>
-      <Subtitle>
-        Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200{" "}
-      </Subtitle>
+      <Subtitle>{advertData.title}</Subtitle>
       <InfoConteiner props={{ isDesktop }}>
         <InfoConteinerYearMileage>
-          <Info>2013</Info> <Info>0 KM</Info>
+          <Info>{advertData.year}</Info> <Info>{advertData.mileage}</Info>
         </InfoConteinerYearMileage>
-        <Price>R$ 00.000,00</Price>
+        <Price>R$ {advertData.price}</Price>
       </InfoConteiner>
       <Button
         textStyle="button-medium-text"
