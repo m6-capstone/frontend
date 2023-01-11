@@ -1,7 +1,13 @@
 import { createContext, ReactNode, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../services/api";
-import { AdvertsContextProps, AdvertsContextType, IAdvert, IAdvertCreate } from "./interfaces";
+import {
+  AdvertsContextProps,
+  AdvertsContextType,
+  IAdvert,
+  IAdvertCreate,
+  IComment,
+} from "./interfaces";
 
 const initialValue = {
   advertsList: [],
@@ -19,16 +25,21 @@ const initialValue = {
     isActive: true,
     isPublished: true,
     user: null,
+    comments: [],
   },
   isFetching: false,
   isEmpty: false,
   isLoaded: false,
   isSuccess: false,
+  commentsList: [],
+
   getAdvertList: () => {},
   createAdvert: () => {},
   setAdvertsList: () => {},
   setAdvertData: () => {},
   findCarById: () => {},
+  createComment: () => {},
+  refreshComments: () => {},
 };
 
 export const AdvertsContext = createContext<AdvertsContextType>(initialValue);
@@ -40,6 +51,8 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
   const [isLoaded, setIsLoaded] = useState(initialValue.isLoaded);
   const [isSuccess, setIsSuccess] = useState(initialValue.isSuccess);
   const [isFetching, setIsFetching] = useState(initialValue.isFetching);
+
+  const [commentsList, setCommentsList] = useState(initialValue.commentsList);
 
   const token = localStorage.getItem("userToken");
 
@@ -64,13 +77,24 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
 
   const createAdvert = async (data: IAdvertCreate) => {
     const config = {
-      headers:{
-        "Authorization": `Bearer ${token}`
-      }, 
-    }
-    await api.post(`adverts`,{...data, isPublished: true, advertsType: "common", vehicleType:"car", galleryImages:[data.galleryImage]},config)
-    .then(async (res) => {
-      console.log(res.data);
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    await api
+      .post(
+        `adverts`,
+        {
+          ...data,
+          isPublished: true,
+          advertsType: "common",
+          vehicleType: "car",
+          galleryImages: [data.galleryImage],
+        },
+        config
+      )
+      .then(async (res) => {
+        console.log(res.data);
 
         return res.data;
       })
@@ -96,6 +120,30 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
       });
   };
 
+  const createComment = async (id: string, data: IComment) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    await api
+      .post(`/comments/${id}`, data, config)
+      .then(async (res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err;
+      })
+      .finally(() => {
+        findCarById(id);
+      });
+  };
+
+  const refreshComments = () => {
+    setCommentsList(advertData.comments);
+  };
+
   return (
     <AdvertsContext.Provider
       value={{
@@ -108,6 +156,9 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
         getAdvertList,
         createAdvert,
         findCarById,
+        createComment,
+        commentsList,
+        refreshComments,
       }}
     >
       {children}

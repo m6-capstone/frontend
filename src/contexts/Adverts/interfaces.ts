@@ -15,6 +15,7 @@ export interface IAdvert {
   isActive: boolean;
   isPublished: boolean;
   user: IUser | null;
+  comments: IComment[];
 }
 
 export interface IAdvertCreate {
@@ -30,6 +31,10 @@ export interface IAdvertCreate {
   isPublished: boolean;
 }
 
+export interface IComment {
+  text: string;
+}
+
 export interface AdvertsContextProps {
   children: ReactNode;
 }
@@ -41,8 +46,11 @@ export interface AdvertsContextType {
   isLoaded: boolean;
   isSuccess: boolean;
   isFetching: boolean;
+  commentsList: IComment[];
 
   getAdvertList: () => void;
   createAdvert: (data: IAdvertCreate) => void;
   findCarById: (id: string) => void;
+  createComment: (id: string, data: IComment) => void;
+  refreshComments: () => void;
 }

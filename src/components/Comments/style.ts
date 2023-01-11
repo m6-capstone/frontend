@@ -17,12 +17,17 @@ export const Container = styled.div`
   @media (min-width: 768px) {
     position: unset;
     width: 100%;
+
+    max-height: 400px;
+    overflow-y: scroll;
   }
 `;
 
 export const Title = styled.h3`
   color: ${(props) => props.theme.colors.grey1};
   ${(props) => props.theme.typography.heading["heading-6-600"]}
+
+  position: sticky;
 `;
 
 export const CommentsContainer = styled.div`

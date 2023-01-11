@@ -19,17 +19,16 @@ export const Product = () => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const { autoLogin, isLoggedIn, userData } = useContext(UserContext);
+  const { findCarById, advertData, isFetching, refreshComments } =
+    useContext(AdvertsContext);
+
+  const { id } = useParams();
 
   useEffect(() => {
-    console.log(isLoggedIn);
     if (!isLoggedIn) {
       autoLogin();
     }
   }, []);
-
-  const { findCarById, advertData, isFetching } = useContext(AdvertsContext);
-
-  const { id } = useParams();
 
   useEffect(() => {
     if (id) {

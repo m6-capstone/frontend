@@ -9,22 +9,71 @@ import {
   Recomendation,
 } from "./styles";
 import { Button } from "../Button";
-import { useMediaQuery } from "usehooks-ts";
+import { useMediaQuery, useScreen } from "usehooks-ts";
+import { useContext, useEffect, useState } from "react";
+import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
+import { FieldValues, useController, useForm } from "react-hook-form";
+import { IComment } from "../../contexts/Adverts/interfaces";
 
 export default function CreatesComments() {
   const isMobile = useMediaQuery("(max-width: 767px)");
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
+  const { advertData, isFetching, createComment, refreshComments } =
+    useContext(AdvertsContext);
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
+
+  const onFinish = async (data: any) => {
+    await createComment(advertData.id, data);
+  };
+
+  const [textComment, setTextComment] = useState("");
+
+  useEffect(() => {
+    setValue("text", textComment);
+  }, [textComment]);
+
+  register("text", {
+    onChange: (e) => setTextComment(e.target.value),
+  });
+
+  const setInput = (text: string) => {
+    setTextComment(text);
+  };
+
   return (
     <Container>
-      <CommentsHeader>
-        <Initials>DN</Initials>
-        <Name>Daniel Josias</Name>
-      </CommentsHeader>
-
-      <CommentsContainer>
-        <Comments placeholder="Carro muito confortável, foi uma ótima experiência de compra..."></Comments>
-        {isDesktop && (
+      {!isFetching && (
+        <CommentsHeader>
+          <Initials>{advertData.user?.name[0]}</Initials>
+          <Name>{advertData.user?.name}</Name>
+        </CommentsHeader>
+      )}
+      <form onSubmit={handleSubmit(onFinish)}>
+        <CommentsContainer>
+          <Comments
+            value={textComment}
+            {...register("text")}
+            placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
+          ></Comments>
+          {isDesktop && (
+            <Button
+              content="Comentar"
+              textStyle="button-medium-text"
+              backgroundColor="brand1"
+              color="white"
+              width="70px"
+              padding="20px"
+            />
+          )}
+        </CommentsContainer>
+        {isMobile && (
           <Button
             content="Comentar"
             textStyle="button-medium-text"
@@ -34,22 +83,20 @@ export default function CreatesComments() {
             padding="20px"
           />
         )}
-      </CommentsContainer>
-      {isMobile && (
-        <Button
-          content="Comentar"
-          textStyle="button-medium-text"
-          backgroundColor="brand1"
-          color="white"
-          width="70px"
-          padding="20px"
-        />
-      )}
+      </form>
 
       <RecomendationContainer>
-        <Recomendation>Gostei muito!</Recomendation>
-        <Recomendation>Incrível</Recomendation>
-        <Recomendation>Recomendei para os meus amigos!</Recomendation>
+        <Recomendation onClick={() => setInput("Gostei muito!")}>
+          Gostei muito!
+        </Recomendation>
+        <Recomendation onClick={() => setInput("Incrível!")}>
+          Incrível!
+        </Recomendation>
+        <Recomendation
+          onClick={() => setInput("Recomendei para os meus amigos!")}
+        >
+          Recomendei para os meus amigos!
+        </Recomendation>
       </RecomendationContainer>
     </Container>
   );
