@@ -55,12 +55,14 @@ export const Home = () => {
         title="Carros"
         name={true}
         adminView={false}
+        listType="cars"
       />
       <CarrosselCarrosMotos
         refNav={refMotos}
         title="Motos"
         name={true}
         adminView={false}
+        listType="motorcycles"
       />
       <Footer />
     </>

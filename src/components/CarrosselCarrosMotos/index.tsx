@@ -33,6 +33,7 @@ interface ICarouselCarros {
   name: boolean;
   adminView: boolean;
   refNav?: React.MutableRefObject<null>;
+  listType: string;
 }
 
 export const CarrosselCarrosMotos = ({
@@ -40,10 +41,12 @@ export const CarrosselCarrosMotos = ({
   name,
   adminView,
   refNav,
+  listType,
 }: ICarouselCarros) => {
   const { advertsList, getAdvertList, isLoaded, isEmpty } =
     useContext(AdvertsContext);
 
+  console.log(advertsList);
   useEffect(() => {
     if (!isLoaded) {
       getAdvertList();
@@ -67,7 +70,7 @@ export const CarrosselCarrosMotos = ({
                 className="mySwiper"
               >
                 <SwiperSlide>
-                  {advertsList.map((car, index) => (
+                  {advertsList[listType]?.map((car, index) => (
                     <CarouselCarsItem key={index}>
                       <Link to={`/product/${car.id}`}>
                         <CarouselCarsImageContainer>
