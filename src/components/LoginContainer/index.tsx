@@ -29,6 +29,7 @@ export const LoginContainer = () => {
   const navigate = useNavigate();
 
   const onFinish = async (data: any) => {
+    console.log(data)
     await userLogin(data);
   };
 

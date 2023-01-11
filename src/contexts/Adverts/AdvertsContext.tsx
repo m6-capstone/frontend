@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../services/api";
-import { AdvertsContextProps, AdvertsContextType, IAdvert } from "./interfaces";
+import { AdvertsContextProps, AdvertsContextType, IAdvert, IAdvertCreate } from "./interfaces";
 
 const initialValue = {
   advertsList: [],
@@ -23,6 +23,7 @@ const initialValue = {
   isFetching: false,
   isEmpty: false,
   isLoaded: false,
+  isSuccess: false,
   getAdvertList: () => {},
   createAdvert: () => {},
   setAdvertsList: () => {},
@@ -37,7 +38,10 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
   const [advertsList, setAdvertsList] = useState(initialValue.advertsList);
   const [isEmpty, setIsEmpty] = useState(initialValue.isEmpty);
   const [isLoaded, setIsLoaded] = useState(initialValue.isLoaded);
+  const [isSuccess, setIsSuccess] = useState(initialValue.isSuccess);
   const [isFetching, setIsFetching] = useState(initialValue.isFetching);
+
+  const token = localStorage.getItem("userToken");
 
   const getAdvertList = async () => {
     setIsFetching(true);
@@ -58,15 +62,20 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
       });
   };
 
-  const createAdvert = async (data: IAdvert) => {
-    await api
-      .post(`adverts`, data)
-      .then(async (res) => {
-        console.log(res.data);
+  const createAdvert = async (data: IAdvertCreate) => {
+    const config = {
+      headers:{
+        "Authorization": `Bearer ${token}`
+      }, 
+    }
+    await api.post(`adverts`,{...data, isPublished: true, advertsType: "common", vehicleType:"car", galleryImages:[data.galleryImage]},config)
+    .then(async (res) => {
+      console.log(res.data);
 
         return res.data;
       })
       .catch((err) => {
+        console.log(err);
         return err;
       })
       .finally(() => {});
@@ -94,6 +103,7 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
         advertData,
         isEmpty,
         isLoaded,
+        isSuccess,
         isFetching,
         getAdvertList,
         createAdvert,
