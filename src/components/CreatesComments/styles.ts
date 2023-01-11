@@ -81,7 +81,7 @@ export const RecomendationContainer = styled.div`
   gap: 18px;
 `;
 
-export const Recomendation = styled.p`
+export const Recomendation = styled.button`
   color: ${(props) => props.theme.colors.grey3};
   background: ${(props) => props.theme.colors.grey7};
   flex: none;
@@ -90,4 +90,9 @@ export const Recomendation = styled.p`
   padding: 5px 12px;
   gap: 10px;
   border-radius: 15px;
+
+  &:focus {
+    background: ${(props) => props.theme.colors.brand1};
+    color: ${(props) => props.theme.colors.grey10};
+  }
 `;
