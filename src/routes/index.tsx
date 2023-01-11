@@ -1,5 +1,3 @@
-// criação dos componentes base
-
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";

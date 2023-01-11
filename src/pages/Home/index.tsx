@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CarrosselCarrosMotos } from "../../components/CarrosselCarrosMotos";
 import { CarrosselLeilão } from "../../components/CarrosselLeilão";
@@ -7,7 +6,6 @@ import Footer from "../../components/Footer";
 import { Header } from "../../components/Header";
 import Welcome from "../../components/Welcome";
 import { UserContext } from "../../contexts/User/UserContext";
-import { mockCarros, mockMotos } from "../../mocks";
 
 export const Home = () => {
   const { isLoggedIn, autoLogin, userData } = useContext(UserContext);

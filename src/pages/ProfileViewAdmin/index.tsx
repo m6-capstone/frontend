@@ -6,9 +6,6 @@ import { Header } from "../../components/Header";
 import { ProfileAdmin } from "../../components/ProfileAdmin";
 import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
 import { UserContext } from "../../contexts/User/UserContext";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { mockCarros, mockMotos } from "../../mocks";
-import { getUser } from "../../store/User/getUser";
 import { ContentWrapper } from "./style";
 
 export const ProfileViewAdmin = () => {
