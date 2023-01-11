@@ -42,11 +42,10 @@ export const Wrapper = styled.div`
     height: 239px;
     background-color: ${(props) => props.theme.colors.grey7};
     border-radius: 4px;
-    min-width: 320px;
+    min-width: 250px;
 `
 
 export const Image = styled.img`
     width: 380px;
     height: 125px;
-    
 `

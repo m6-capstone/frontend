@@ -14,21 +14,24 @@ import {
   ButtonContainer,
 } from "./style";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-toastify";
 import { AiOutlineClose } from "react-icons/ai";
 import { Button } from "../Button";
 import { Input } from "../Input";
-import { closeModalCreateAdvert } from "../../store/ModalCreateAdvert.store";
 import { mockCarros } from "../../mocks";
+import { useContext } from "react";
+import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
 
 export default function AdvertContent({ handleCloseModal }: any) {
+  const { createAdvert, isSuccess } = useContext(AdvertsContext)
+
   const advertSchema = yup.object().shape({
     title: yup.string().required("Título obrigatório"),
     year: yup.string().required("Ano obrigatório"),
-    mileage: yup.number().required("Quilometragem obrigatória"),
-    price: yup.string().required("Preço obrigatório"),
+    mileage: yup.string().required("Quilometragem obrigatória"),
+    price: yup.number().required("Preço obrigatório"),
     description: yup.string().required("Descrição obrigatória"),
     coverImage: yup.string().required("Imagem da capa obrigatória"),
     galleryImage: yup.string().required("Imagem da galeria obrigatória"),
@@ -38,24 +41,22 @@ export default function AdvertContent({ handleCloseModal }: any) {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(advertSchema),
   });
 
+  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
+    control, 
+    name: "galleryImages",
+  });
+
   const onSubmitFunction = async (data: any) => {
-    // const carro = {
-    //   image: data.galleryImage,
-    //   title: data.title,
-    //   description: data.description,
-    //   owner: "Samuel Leão",
-    //   iconColor: "random1",
-    //   tags: [data.year, `${data.mileage} KM`],
-    //   price: `R$ ${data.price},00`,
-    // };
-    // console.log(carro);
-    // mockCarros.push(carro);
+      await createAdvert(data)
+      /* handleCloseModal(false) */
+      console.log(data)
   };
 
   return (
@@ -124,7 +125,7 @@ export default function AdvertContent({ handleCloseModal }: any) {
 
               <Input
                 placeholder="45.000,00"
-                type="text"
+                type="number"
                 label="Preço"
                 register={{ ...register("price") }}
                 error={errors.price?.message}
@@ -201,7 +202,6 @@ export default function AdvertContent({ handleCloseModal }: any) {
               width="228px"
               color="white"
               type="submit"
-              onClick={() => handleCloseModal(false)}
             />
           </ButtonContainer>
         </>
