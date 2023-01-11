@@ -13,9 +13,10 @@ import { MdMenu, MdClose } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
 import { MenuMobile } from "../MenuMobile";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { logout } from "../../store/User/User.store";
+// import { useAppDispatch, useAppSelector } from "../../hooks";
+// import { logout } from "../../store/User/User.store";
 import { UserContext } from "../../contexts/User/UserContext";
+import DropdownMenu from "../DropDown";
 
 export const Header = () => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -52,10 +53,7 @@ export const Header = () => {
 
               {isLoggedIn ? (
                 <>
-                  <Link to="/profileviewadmin">
-                    <HeaderItem>{userData.name}</HeaderItem>
-                  </Link>
-                  <Button
+                  {/* <Button
                     textStyle="button-big-text"
                     content="Logout"
                     borderColor="alert1"
@@ -63,7 +61,12 @@ export const Header = () => {
                     onClick={() => {
                       userLogout();
                     }}
-                  />
+                  /> */}
+                  <DropdownMenu> 
+                  <Link to="/profileviewadmin">
+                    <HeaderItem>{userData.name}</HeaderItem>
+                  </Link>
+                  </DropdownMenu>
                 </>
               ) : (
                 <>
