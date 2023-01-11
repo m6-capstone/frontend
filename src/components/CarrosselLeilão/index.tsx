@@ -27,11 +27,18 @@ import {
   Timer,
 } from "./style";
 import { carrosLeilao } from "../../mocks";
+import { Button } from "../Button";
 
-export const CarrosselLeilão = () => {
+export interface ICarrossel {
+  name: boolean;
+  adminView: boolean;
+  refNav?: React.MutableRefObject<null>;
+}
+
+export const CarrosselLeilão = ({ name, adminView, refNav }: ICarrossel) => {
   return (
-    <CarousselContainer>
-      <CarousselTitle>Leilão</CarousselTitle>
+    <CarousselContainer ref={refNav}>
+      {name && <CarousselTitle>Leilão</CarousselTitle>}
       <Caroussel>
         <Swiper slidesPerView={"auto"} spaceBetween={24} className="mySwiper">
           {carrosLeilao.map((car, index) => (

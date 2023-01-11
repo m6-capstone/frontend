@@ -142,3 +142,8 @@ export const Price = styled.span`
   color: ${(props) => props.theme.colors.grey1};
   ${(props) => props.theme.typography.heading["heading-7-500"]}
 `;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 16px;
+`;

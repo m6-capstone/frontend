@@ -49,6 +49,10 @@ export const ButtonContainer = styled.div`
   gap: 21px;
   width: 93.6%;
 
+  a {
+    width: 100%;
+  }
+
   @media (min-width: 768px) {
     flex-direction: row;
     width: 350px;

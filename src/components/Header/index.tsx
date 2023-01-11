@@ -10,31 +10,75 @@ import Logo from "../../assets/motors-shop.svg";
 import { Button } from "../Button";
 import { useMediaQuery } from "usehooks-ts";
 import { MdMenu, MdClose } from "react-icons/md";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MenuMobile } from "../MenuMobile";
+import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { logout } from "../../store/User/User.store";
+import { UserContext } from "../../contexts/User/UserContext";
 
 export const Header = () => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const { userData, userLogout, isLoggedIn } = useContext(UserContext);
+
+  const switchMenu: () => void = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <>
       <HeaderContainer>
-        <ImgLogo src={Logo} />
+        <Link to="/home">
+          <ImgLogo src={Logo} />
+        </Link>
         {isDesktop ? (
           <NavBar>
             <Menu>
-              <HeaderItem>Carros</HeaderItem>
-              <HeaderItem>Motos</HeaderItem>
-              <HeaderItem>Leilão</HeaderItem>
+              <Link to="/home/carros">
+                <HeaderItem>Carros</HeaderItem>
+              </Link>
+
+              <Link to="/home/motos">
+                <HeaderItem>Motos</HeaderItem>
+              </Link>
+
+              <Link to="/home/leilao">
+                <HeaderItem>Leilão</HeaderItem>
+              </Link>
               <Bar />
-              <HeaderItem>Fazer Login</HeaderItem>
-              <Button
-                textStyle="button-big-text"
-                content="Cadastrar"
-                borderColor="grey4"
-              />
+
+              {isLoggedIn ? (
+                <>
+                  <Link to="/profileviewadmin">
+                    <HeaderItem>{userData.name}</HeaderItem>
+                  </Link>
+                  <Button
+                    textStyle="button-big-text"
+                    content="Logout"
+                    borderColor="alert1"
+                    color="alert1"
+                    onClick={() => {
+                      userLogout();
+                    }}
+                  />
+                </>
+              ) : (
+                <>
+                  <Link to="/login">
+                    <HeaderItem>Fazer Login</HeaderItem>
+                  </Link>
+                  <Link to="/register">
+                    <Button
+                      textStyle="button-big-text"
+                      content="Cadastrar"
+                      borderColor="grey4"
+                    />
+                  </Link>
+                </>
+              )}
             </Menu>
           </NavBar>
         ) : (

@@ -3,6 +3,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import {
+  ButtonWrapper,
   CarouselCars,
   CarouselCarsContainer,
   CarouselCarsImageContainer,
@@ -20,56 +21,109 @@ import {
   Tag,
   TagContainer,
 } from "./style";
+import { Button } from "../Button";
+import { IAdvert } from "../../contexts/Adverts/interfaces";
+import { useContext, useEffect } from "react";
+import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
+import { Link } from "react-router-dom";
 
 interface ICarouselCarros {
   title: string;
-  mock: {
-    image: string;
-    title: string;
-    description: string;
-    owner: string;
-    iconColor: string;
-    tags: string[];
-    price: string;
-  }[];
+  mock?: IAdvert[];
+  name: boolean;
+  adminView: boolean;
+  refNav?: React.MutableRefObject<null>;
 }
 
-export const CarrosselCarrosMotos = ({ title, mock }: ICarouselCarros) => {
+export const CarrosselCarrosMotos = ({
+  title,
+  name,
+  adminView,
+  refNav,
+}: ICarouselCarros) => {
+  const { advertsList, getAdvertList, isLoaded, isEmpty } =
+    useContext(AdvertsContext);
+
+  useEffect(() => {
+    if (!isLoaded) {
+      getAdvertList();
+    }
+  }, []);
+
   return (
-    <CarouselCarsContainer>
+    <CarouselCarsContainer ref={refNav}>
       <CarouselTitle>{title}</CarouselTitle>
       <CarouselCars>
-        <Swiper slidesPerView={"auto"} spaceBetween={24} className="mySwiper">
-          {mock.map((car, index) => (
-            <SwiperSlide key={index}>
-              <CarouselCarsItem>
-                <CarouselCarsImageContainer>
-                  <CarouselCarsItemImage src={car.image} />
-                </CarouselCarsImageContainer>
-                <CarouselCarsItemDeatils>
-                  <CarouselCarsItemTitle>{car.title}</CarouselCarsItemTitle>
-                  <CarouselCarsItemDescription>
-                    {car.description}
-                  </CarouselCarsItemDescription>
-                  <OwnerContainer>
-                    <OwnerIcon backgroundColor={car.iconColor}>
-                      {car.owner[0]}
-                    </OwnerIcon>
-                    <OwnerName>{car.owner}</OwnerName>
-                  </OwnerContainer>
-                  <InfoContainer>
-                    <TagContainer>
-                      {car.tags.map((tag, index) => (
-                        <Tag key={index}>{tag}</Tag>
-                      ))}
-                    </TagContainer>
-                    <Price>{car.price}</Price>
-                  </InfoContainer>
-                </CarouselCarsItemDeatils>
-              </CarouselCarsItem>
-            </SwiperSlide>
+        {isLoaded &&
+          (isEmpty ? (
+            <CarouselCarsItemTitle>
+              Não há {title.toLowerCase()} nessa lista.
+            </CarouselCarsItemTitle>
+          ) : (
+            <>
+              <Swiper
+                slidesPerView={"auto"}
+                spaceBetween={24}
+                className="mySwiper"
+              >
+                <SwiperSlide>
+                  {advertsList.map((car, index) => (
+                    <CarouselCarsItem key={index}>
+                      <Link to={`/product/${car.id}`}>
+                        <CarouselCarsImageContainer>
+                          <CarouselCarsItemImage src={car.coverImage} />
+                        </CarouselCarsImageContainer>
+                      </Link>
+                      <CarouselCarsItemDeatils>
+                        <Link to={`/product/${car.id}`}>
+                          <CarouselCarsItemTitle>
+                            {car.title}
+                          </CarouselCarsItemTitle>
+                        </Link>
+                        <Link to={`/product/${car.id}`}>
+                          <CarouselCarsItemDescription>
+                            {car.description}
+                          </CarouselCarsItemDescription>
+                        </Link>
+                        <OwnerContainer>
+                          <OwnerIcon backgroundColor={"random8"}>
+                            {car.user?.name[0]}
+                          </OwnerIcon>
+                          <OwnerName>{car.user?.name}</OwnerName>
+                        </OwnerContainer>
+                        <InfoContainer>
+                          <TagContainer>
+                            <Tag>{car.year}</Tag>
+                            <Tag>{car.mileage}</Tag>
+                          </TagContainer>
+                          <Price>
+                            R$ {car.price.split(".")[0]},
+                            {car.price.split(".")[1]}
+                          </Price>
+                        </InfoContainer>
+                        {adminView && (
+                          <ButtonWrapper>
+                            <Button
+                              textStyle="button-big-text"
+                              content="Editar"
+                              borderColor="grey1"
+                              color="grey1"
+                            />
+                            <Button
+                              textStyle="button-big-text"
+                              content="Ver como"
+                              borderColor="grey1"
+                              color="grey1"
+                            />
+                          </ButtonWrapper>
+                        )}
+                      </CarouselCarsItemDeatils>
+                    </CarouselCarsItem>
+                  ))}
+                </SwiperSlide>
+              </Swiper>
+            </>
           ))}
-        </Swiper>
       </CarouselCars>
     </CarouselCarsContainer>
   );
