@@ -168,6 +168,7 @@ export const Theme: DefaultTheme = {
         "font-weight": "600",
         "font-size": "14px",
         "line-height": "0px",
+        "text-align": "center",
       },
       "button-small-text": {
         "font-family": "Inter",
