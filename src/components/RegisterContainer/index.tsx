@@ -1,7 +1,5 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../hooks";
-import { registerUser } from "../../store/User/registerUser";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import {
@@ -20,22 +18,9 @@ export const RegisterContainer = () => {
     formState: { errors },
   } = useForm();
 
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const onFinish = (data: any) => {
-    dispatch(
-      registerUser({
-        name: data.name,
-        email: data.email,
-        cellphone: data.cellphone,
-        birthdate: data.birthdate,
-        description: data.description,
-        cpf: data.cpf,
-        password: data.password,
-        isSeller: true,
-      })
-    );
     navigate("/");
   };
 

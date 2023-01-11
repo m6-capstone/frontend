@@ -1,6 +1,5 @@
 import { Header } from "../../components/Header";
 import AdvertOwnerInformation from "../../components/AdvertOwnerInformation/index";
-import { BlueBackground, Profile } from "../../components/ProfileAdmin/style";
 import CarInformation from "../../components/CarInformation";
 import Description from "../../components/Description";
 import Comments from "../../components/Comments";
@@ -19,7 +18,7 @@ export const Product = () => {
   const isMobile = useMediaQuery("(min-width: 375px)");
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  const { autoLogin, isLoggedIn } = useContext(UserContext);
+  const { autoLogin, isLoggedIn, userData } = useContext(UserContext);
 
   useEffect(() => {
     console.log(isLoggedIn);
