@@ -1,23 +1,17 @@
-import Modal from 'react-modal'
-import AdvertContent from '../AdvertContent'
-import { customStyles } from "../../styles/CustomStyles"
+import { Dispatch, SetStateAction } from "react";
+import EditAdvertContent  from '../EditAdvertContent'
+import { ModalBackground, ModalContainer } from "./styles";
 
-interface Props {
-  modal: boolean, 
-  handleCloseModal: () => void,
+interface IModalComponent {
+  handleModal: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function modalEditAdvert({modal, handleCloseModal}:Props) {
+export const ModalComponent = ({ handleModal }: IModalComponent) => {
   return (
-    <>
-       <Modal
-        isOpen={modal}
-        onRequestClose={handleCloseModal}
-        style={customStyles}
-        ariaHideApp={false}
-      >
-        <AdvertContent handleCloseModal={handleCloseModal}/>
-      </Modal>
-    </>
-  )
-}
+    <ModalBackground>
+      <ModalContainer>
+        <EditAdvertContent handleCloseModal={handleModal} />
+      </ModalContainer>
+    </ModalBackground>
+  );
+};

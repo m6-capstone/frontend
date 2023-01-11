@@ -11,8 +11,8 @@ export default function EditAdvertContent({handleCloseModal}:any) {
   const advertSchema = yup.object().shape({
     title: yup.string().required("Título obrigatório"),
     year: yup.string().required("Ano obrigatório").email("E-mail inválido"),
-    mileage: yup.number().required("Quilometragem obrigatória"),
-    price: yup.string().required("Preço obrigatório"),
+    mileage: yup.string().required("Quilometragem obrigatória"),
+    price: yup.number().required("Preço obrigatório"),
     description: yup.string().required("Descrição obrigatória"),
     coverImage: yup.string().required("Imagem da capa obrigatória"),
     galleryImage: yup.string().required("Imagem da galeria obrigatória")
@@ -29,9 +29,8 @@ export default function EditAdvertContent({handleCloseModal}:any) {
   });
     
   const onSubmitFunction = async (data:object) => {
-    //enviar o objeto data , que contém as info.. do anúncio, para o back end
-    //toast.success('')
-    //toast.error('')
+    console.log(data)
+    /* handleCloseModal(true) */
   }
 
   return (
@@ -49,21 +48,20 @@ export default function EditAdvertContent({handleCloseModal}:any) {
               <Button content="Leilão" textStyle="button-big-text" width="228px" borderColor="grey4"/>
           </AdvertType>
 
-          <SubTitle>Informações do veículo</SubTitle>
-          
+          <SubTitle>Informações do veículo</SubTitle>  
           <InputContainer>
             <>
               <Input placeholder="Digitar título" type="text" label="Título" register={{...register("title")}} error={errors.title?.message} />
 
               <Wrapper>
                 <>
-                  <Input placeholder="2022" type="number" label="Ano" register={{...register("year")}} error={errors.year?.message} width="small" />
+                  <Input placeholder="2022" type="text" label="Ano" register={{...register("year")}} error={errors.year?.message} width="small" />
                   
                   <Input placeholder="0" type="text" label="Quilometragem" register={{...register("mileage")}} error={errors.mileage?.message && "Quilometragem obrigatória"} width="small"/>
                 </>
               </Wrapper>
 
-              <Input placeholder="45.000,00" type="text" label="Preço" register={{...register("price")}} error={errors.price?.message} />
+              <Input placeholder="45.000,00" type="number" label="Preço" register={{...register("price")}} error={errors.price?.message} />
               
               <Input placeholder="Digitar descrição" type="textArea" label="Descrição" register={{...register("description")}} error={errors.description?.message} />
             </>
@@ -86,7 +84,7 @@ export default function EditAdvertContent({handleCloseModal}:any) {
           
           <ButtonContainer>
             <Button content="Cancelar" textStyle="button-medium-text" width="228px" borderColor="grey6"  backgroundColor="grey6" type="reset" onClick={handleCloseModal}/>
-            <Button content="Criar anúncio" textStyle="button-medium-text" backgroundColor="brand3" width="228px" color="white" type="submit" onClick={handleCloseModal}/>
+            <Button content="Editar anúncio" textStyle="button-medium-text" backgroundColor="brand3" width="228px" color="white" type="submit" />
           </ButtonContainer>
         </>
       </Form>
