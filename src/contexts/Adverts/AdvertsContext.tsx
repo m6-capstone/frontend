@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../services/api";
-import { AdvertsContextProps, AdvertsContextType, IAdvert } from "./interfaces";
+import { AdvertsContextProps, AdvertsContextType, IAdvert, IAdvertCreate } from "./interfaces";
 
 const initialValue = {
   advertsList: [],
@@ -41,7 +41,7 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
   const [isSuccess, setIsSuccess] = useState(initialValue.isSuccess);
   const [isFetching, setIsFetching] = useState(initialValue.isFetching);
 
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzMzNjYyMDUsImV4cCI6MTY3MzQ1MjYwNSwic3ViIjoiNmIzZDZmMDQtNWMxZC00M2E5LWE5NjQtOTgyNTY2MDc0OGVkIn0.8Y41UHPQ-dAlkYyMQnUlGhWjSaqiw3VMW8hNQRtUw4g"
+  const token = localStorage.getItem("userToken");
 
   const getAdvertList = async () => {
     setIsFetching(true);
@@ -62,20 +62,20 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
       });
   };
 
-  const createAdvert = async (data: IAdvert) => {
+  const createAdvert = async (data: IAdvertCreate) => {
     const config = {
       headers:{
-        "Content-Type":"application/json",
-      },
-      authorization: token
+        "Authorization": `Bearer ${token}`
+      }, 
     }
-    await api.post(`adverts`,data,config)
-      .then(async (res) => {
-        console.log(res.data);
+    await api.post(`adverts`,{...data, isPublished: true, advertsType: "common", vehicleType:"car", galleryImages:[data.galleryImage]},config)
+    .then(async (res) => {
+      console.log(res.data);
 
         return res.data;
       })
       .catch((err) => {
+        console.log(err);
         return err;
       })
       .finally(() => {});

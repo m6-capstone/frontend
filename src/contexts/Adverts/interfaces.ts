@@ -17,6 +17,19 @@ export interface IAdvert {
   user: IUser | null;
 }
 
+export interface IAdvertCreate {
+  advertsType: string;
+  title: string;
+  year: string;
+  mileage: string;
+  price: string;
+  description: string;
+  vehicleType: string;
+  coverImage: string;
+  galleryImage: string;
+  isPublished: boolean;
+}
+
 export interface AdvertsContextProps {
   children: ReactNode;
 }
@@ -30,6 +43,6 @@ export interface AdvertsContextType {
   isFetching: boolean;
 
   getAdvertList: () => void;
-  createAdvert: (data: IAdvert) => void;
+  createAdvert: (data: IAdvertCreate) => void;
   findCarById: (id: string) => void;
 }
