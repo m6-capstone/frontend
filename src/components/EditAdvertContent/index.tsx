@@ -1,4 +1,4 @@
-import { Container, Form, AdvertHeader, HeaderTitle, ModalCloseButton, AdverTypeTitle, AdvertType, SubTitle, InputContainer , Wrapper, VehicleTypeTitle, VehicleType, ButtonContainer } from "./style"
+import { Container, Form, AdvertHeader, HeaderTitle, ModalCloseButton, AdverTypeTitle, AdvertType, SubTitle, InputContainer , Wrapper, VehicleTypeTitle, VehicleType, ButtonContainer, Published, PublishedTitle } from "./style"
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -72,6 +72,12 @@ export default function EditAdvertContent({handleCloseModal}:any) {
               <Button content="Carro" textStyle="button-big-text" backgroundColor="brand1" width="228px" color="white"/>
               <Button content="Moto" textStyle="button-big-text" width="228px" borderColor="grey4"/>
           </VehicleType>
+          
+          <PublishedTitle>Publicado</PublishedTitle>
+          <Published>
+            <Button content="Sim" textStyle="button-big-text" width="228px" borderColor="grey4"/>
+            <Button content="Não" textStyle="button-big-text" backgroundColor="brand1" width="228px" color="white"/>
+          </Published>
 
           <InputContainer>
             <>
@@ -82,9 +88,9 @@ export default function EditAdvertContent({handleCloseModal}:any) {
 
           <Button content="Adicionar campo para imagem da galeria" textStyle="button-small-text" color="brand1" height="5px" backgroundColor="brand4"/>
           
-          <ButtonContainer>
-            <Button content="Cancelar" textStyle="button-medium-text" width="228px" borderColor="grey6"  backgroundColor="grey6" type="reset" onClick={handleCloseModal}/>
-            <Button content="Editar anúncio" textStyle="button-medium-text" backgroundColor="brand3" width="228px" color="white" type="submit" />
+          <ButtonContainer> 
+            <Button content="Excluir anúncio" textStyle="button-medium-text" width="228px" borderColor="grey6"  backgroundColor="grey6" type="reset" onClick={handleCloseModal}/>
+            <Button content="Salvar alterações" textStyle="button-medium-text" backgroundColor="brand3" width="228px" color="white" type="submit" />
           </ButtonContainer>
         </>
       </Form>
