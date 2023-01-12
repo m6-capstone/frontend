@@ -9,21 +9,14 @@ import { UserContext } from "../../contexts/User/UserContext";
 import { ContentWrapper } from "./style";
 
 export const ProfileViewAdmin = () => {
-  const { autoLogin, isLoggedIn } = useContext(UserContext);
-  const { advertsList, getAdvertList, isLoaded, isEmpty } =
+  const { autoLogin, isLoggedIn, userData } = useContext(UserContext);
+  const { advertsList, getAdvertsByUser, isLoaded, isEmpty } =
     useContext(AdvertsContext);
 
   useEffect(() => {
-    console.log(isLoggedIn);
     if (!isLoggedIn) {
       autoLogin();
-      getAdvertList();
     }
-    console.log(advertsList);
-  }, []);
-
-  useEffect(() => {
-    console.log(advertsList["cars"][0].user);
   }, []);
 
   return (
@@ -31,7 +24,7 @@ export const ProfileViewAdmin = () => {
       <Header />
       <ContentWrapper>
         <ProfileAdmin />
-        <CarrosselLeilão name={false} adminView={true} />
+        {/* <CarrosselLeilão name={false} adminView={true} /> */}
         {isLoaded && (
           <>
             <CarrosselCarrosMotos

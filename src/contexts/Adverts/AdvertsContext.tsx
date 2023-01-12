@@ -27,6 +27,7 @@ const initialValue = {
   createComment: () => {},
   refreshComments: () => {},
   getAuctionList: () => {},
+  getAdvertsByUser: () => {},
 };
 
 export const AdvertsContext = createContext<AdvertsContextType>(initialValue);
@@ -147,6 +148,23 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
     setCommentsList(advertData?.comments);
   };
 
+  const getAdvertsByUser = async (id: string) => {
+    setIsFetching(true);
+    await api
+      .get(`/adverts/user/${id}`)
+      .then(async (res) => {
+        await setAdvertsList(res.data.common);
+        return res;
+      })
+      .catch((err) => {
+        setAdvertData(null);
+        return err;
+      })
+      .finally(() => {
+        setIsFetching(false);
+      });
+  };
+
   return (
     <AdvertsContext.Provider
       value={{
@@ -164,6 +182,7 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
         commentsList,
         auctionList,
         refreshComments,
+        getAdvertsByUser,
       }}
     >
       {children}

@@ -13,19 +13,26 @@ import { ContentWrapper } from "../ProfileViewAdmin/style";
 export const ProfileViewCommon = () => {
   const { advertData } = useContext(AdvertsContext);
 
-  const { isFetching, getUserById, userData } = useContext(UserContext);
+  const { isLoggedIn, autoLogin, isFetching, getUserById, userData } =
+    useContext(UserContext);
 
   const { id } = useParams();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      autoLogin();
+    }
+  }, []);
 
   useEffect(() => {
     if (id) {
       getUserById(id);
     }
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     console.log(userData);
-  }, [userData]);
+  }, [isLoggedIn]);
 
   return (
     <>
