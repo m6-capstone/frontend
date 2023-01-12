@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useScreen } from "usehooks-ts";
 import { Button } from "../Button";
 import { ModalComponent } from "../Modal";
@@ -14,15 +14,41 @@ import {
   TitleWrapper,
 } from "./style";
 import { UserContext } from "../../contexts/User/UserContext";
+import ModalCreatesAdvert from "../ModalCreatesAdvert";
+import { ModalEditProfile } from "../ModalEditProfile";
 
 export const ProfileAdmin = () => {
-  const [modal, setModal] = useState(false);
+  const [modalCreateAdvert, setModalCreateAdvert] = useState(false);
+  // const [modalEditProfile, setModalEditProfile] = useState(false);
 
-  const { userData, userLogout, isLoggedIn } = useContext(UserContext);
+  const {
+    userData,
+    userLogout,
+    isLoggedIn,
+    modalEditProfile,
+    closeEditProfile,
+  } = useContext(UserContext);
+
+  useEffect(() => {
+    console.log(modalEditProfile);
+  }, [modalEditProfile]);
 
   return (
     <>
-      {modal && <ModalComponent handleModal={setModal}></ModalComponent>}
+      {/* {modal && (
+        <ModalCreatesAdvert
+          modal={modal}
+          handleCloseModal={setModal}
+        ></ModalCreatesAdvert>
+      )} */}
+      {modalCreateAdvert && (
+        <ModalComponent handleModal={setModalCreateAdvert}></ModalComponent>
+      )}
+
+      {modalEditProfile && (
+        <ModalEditProfile handleModal={closeEditProfile}></ModalEditProfile>
+      )}
+
       <ProfileAdminContainer>
         <BlueBackground></BlueBackground>
         <Profile>
@@ -40,7 +66,7 @@ export const ProfileAdmin = () => {
             borderColor="brand1"
             color="brand1"
             onClick={() => {
-              setModal(true);
+              setModalCreateAdvert(true);
             }}
           ></Button>
         </Profile>

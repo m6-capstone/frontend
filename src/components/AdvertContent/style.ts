@@ -14,10 +14,18 @@ export const Container = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+
+  gap: 10px;
+
   border-radius: 8px;
   width: 375px;
   padding: 16px 24px;
   background-color: ${(props) => props.theme.colors.white};
+
+  .inputCurl__input {
+    color: ${(props) => props.theme.colors.grey3};
+    border: 1.5px solid ${(props) => props.theme.colors.grey7};
+  }
 `;
 
 export const AdvertHeader = styled.div`
@@ -59,6 +67,11 @@ export const InputContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   padding: 16px 0px;
+
+  .inputCurl__input {
+    color: ${(props) => props.theme.colors.grey3};
+    border: 1.5px solid ${(props) => props.theme.colors.grey7};
+  }
 `;
 
 export const Wrapper = styled.div`

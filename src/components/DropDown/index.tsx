@@ -4,7 +4,8 @@ import { UserContext } from "../../contexts/User/UserContext";
 import { Container, OptionList } from "./style";
 
 function DropdownMenu({ children }) {
-  const { userData, userLogout, isLoggedIn } = useContext(UserContext);
+  const { userData, userLogout, isLoggedIn, openEditProfile } =
+    useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   return (
@@ -16,9 +17,10 @@ function DropdownMenu({ children }) {
       {showMenu ? (
         <OptionList>
           <li
-            onClick={() =>
-              console.log("Adicionar função de editar Perfil de usuario:)")
-            }
+            onClick={() => {
+              console.log("Adicionar função de editar Perfil de usuario:)");
+              openEditProfile();
+            }}
           >
             Editar Perfil
           </li>
