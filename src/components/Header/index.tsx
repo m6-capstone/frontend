@@ -25,7 +25,8 @@ export const Header = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { userData, userLogout, isLoggedIn } = useContext(UserContext);
+  const { userData, userLogout, isLoggedIn, openEditProfile } =
+    useContext(UserContext);
 
   const switchMenu: () => void = () => {
     setIsMenuOpen(!isMenuOpen);

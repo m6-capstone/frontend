@@ -35,10 +35,15 @@ export interface UserContextType {
   isSuccess: boolean;
   isError: boolean;
 
+  modalEditProfile: boolean;
+  openEditProfile: () => void;
+  closeEditProfile: () => void;
+
   saveToken: (userToken: string) => void;
   userLogin: ({ email, password }: ILogin) => void;
   getUser: (userToken: string) => void;
   userLogout: () => void;
   autoLogin: () => void;
   getUserById: (id: string) => void;
+  editProfile: (id: string, data: any) => void;
 }

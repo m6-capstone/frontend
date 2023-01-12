@@ -11,6 +11,7 @@ const initialValue = {
   isFetching: false,
   isSuccess: false,
   isError: false,
+  modalEditProfile: false,
   setUserData: () => {},
   setUserToken: () => {},
   saveToken: () => {},
@@ -19,6 +20,9 @@ const initialValue = {
   getUser: () => {},
   autoLogin: () => {},
   getUserById: () => {},
+  openEditProfile: () => {},
+  closeEditProfile: () => {},
+  editProfile: () => {},
 };
 
 export const UserContext = createContext<UserContextType>(initialValue);
@@ -33,6 +37,10 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
   const [isFetching, setIsFetching] = useState(initialValue.isFetching);
   const [isSuccess, setIsSuccess] = useState(initialValue.isSuccess);
   const [isError, setIsError] = useState(initialValue.isError);
+
+  const [modalEditProfile, setModalEditProfile] = useState(
+    initialValue.modalEditProfile
+  );
 
   const saveToken = async (token: string) => {
     await setUserToken(token);
@@ -123,6 +131,35 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
       });
   };
 
+  const editProfile = async (id: string, data: any) => {
+    const localToken = localStorage.getItem("userToken");
+
+    await api
+      .patch(`/users/${id}`, data, {
+        headers: { Authorization: "Bearer " + localToken },
+      })
+      .then(async (res) => {
+        console.log(res);
+        await setUserData(res.data);
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      })
+      .finally(() => {
+        setIsFetching(false);
+      });
+  };
+
+  const openEditProfile = async () => {
+    await navigate("/myprofile");
+    await setModalEditProfile(true);
+  };
+
+  const closeEditProfile = async () => {
+    await setModalEditProfile(false);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -139,6 +176,10 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
         getUser,
         autoLogin,
         getUserById,
+        modalEditProfile,
+        openEditProfile,
+        closeEditProfile,
+        editProfile,
       }}
     >
       {children}
