@@ -28,6 +28,8 @@ import {
 } from "./style";
 import { carrosLeilao } from "../../mocks";
 import { Button } from "../Button";
+import { useContext, useEffect } from "react";
+import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
 
 export interface ICarrossel {
   name: boolean;
@@ -36,6 +38,19 @@ export interface ICarrossel {
 }
 
 export const CarrosselLeilão = ({ name, adminView, refNav }: ICarrossel) => {
+  const { auctionList, getAuctionList, getAdvertList, isLoaded, isEmpty } =
+    useContext(AdvertsContext);
+
+  useEffect(() => {
+    if (!isLoaded) {
+      getAuctionList();
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(auctionList);
+  }, [auctionList]);
+
   return (
     <CarousselContainer ref={refNav}>
       {name && <CarousselTitle>Leilão</CarousselTitle>}

@@ -13,9 +13,6 @@ import {
   ProfileTitle,
   TitleWrapper,
 } from "./style";
-import { useSelector } from "react-redux";
-import ModalCreatesAdvert from "../ModalCreatesAdvert";
-import { useAppDispatch, useAppSelector } from "../../hooks";
 import { UserContext } from "../../contexts/User/UserContext";
 
 export const ProfileAdmin = () => {

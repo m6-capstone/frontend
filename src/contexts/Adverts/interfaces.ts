@@ -40,14 +40,17 @@ export interface AdvertsContextProps {
 }
 
 export interface AdvertsContextType {
-  advertData: IAdvert;
+  advertData: IAdvert | null;
   advertsList: { cars: IAdvert[]; motorcycles: IAdvert[] };
+  auctionList: { cars: IAdvert[]; motorcycles: IAdvert[] };
+
   isEmpty: boolean;
   isLoaded: boolean;
   isSuccess: boolean;
   isFetching: boolean;
   commentsList: IComment[];
 
+  getAuctionList: () => void;
   getAdvertList: () => void;
   createAdvert: (data: IAdvertCreate) => void;
   findCarById: (id: string) => void;

@@ -67,6 +67,9 @@ export const HeaderItem = styled.li`
   cursor: pointer;
 
   width: 100%;
+  &:hover {
+    color: ${(props) => props.theme.colors.brand1};
+  }
 `;
 
 export const Bar = styled.div`
@@ -74,4 +77,10 @@ export const Bar = styled.div`
   height: 80px;
 
   background-color: ${(props) => props.theme.colors.grey6};
+`;
+
+export const DropdownMenuContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;

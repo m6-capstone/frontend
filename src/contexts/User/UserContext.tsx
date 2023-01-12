@@ -5,15 +5,7 @@ import { api } from "../../services/api";
 import { ILogin, UserContextProps, UserContextType } from "./interfaces";
 
 const initialValue = {
-  userData: {
-    name: "",
-    email: "",
-    cpf: "",
-    cellphone: "",
-    birthdate: "",
-    description: "",
-    isSeller: false,
-  },
+  userData: null,
   userToken: "",
   isLoggedIn: false,
   isFetching: false,
@@ -26,6 +18,7 @@ const initialValue = {
   userLogout: () => {},
   getUser: () => {},
   autoLogin: () => {},
+  getUserById: () => {},
 };
 
 export const UserContext = createContext<UserContextType>(initialValue);
@@ -52,7 +45,7 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
     await api
       .post(`login`, { email, password })
       .then(async (res) => {
-        console.log(res.data)
+        console.log(res.data);
         await saveToken(res.data.token);
         await getUser(res.data.token);
 
@@ -84,6 +77,8 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
         return res.data;
       })
       .catch((err) => {
+        setUserData(null);
+
         return err;
       })
       .finally(() => {});
@@ -111,6 +106,23 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
     navigate("/");
   };
 
+  const getUserById = async (id: string) => {
+    setIsFetching(true);
+
+    await api
+      .get(`/users/${id}`)
+      .then(async (res) => {
+        await setUserData(res.data);
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      })
+      .finally(() => {
+        setIsFetching(false);
+      });
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -120,13 +132,13 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
         isError,
         isSuccess,
         isLoggedIn,
-        setUserData,
         setUserToken,
         saveToken,
         userLogin,
         userLogout,
         getUser,
         autoLogin,
+        getUserById,
       }}
     >
       {children}

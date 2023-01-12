@@ -1,4 +1,4 @@
-import Image from '../Image'
+import Image from "../Image";
 import { Dispatch, SetStateAction } from "react";
 import { ModalBackground, ModalContainer } from "../Modal/style";
 
@@ -7,12 +7,15 @@ interface IModalComponent {
   images: object;
 }
 
-export default function ModalShowImage({handleModal,images}:IModalComponent) {
+export default function ModalShowImage({
+  handleModal,
+  images,
+}: IModalComponent) {
   return (
     <>
       <ModalBackground>
         <ModalContainer>
-          <Image handleCloseModal={handleModal} images={images}/>
+          <Image handleCloseModal={handleModal} images={images} />
         </ModalContainer>
       </ModalBackground>
     </>

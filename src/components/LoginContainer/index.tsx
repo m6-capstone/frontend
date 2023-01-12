@@ -29,15 +29,15 @@ export const LoginContainer = () => {
   const navigate = useNavigate();
 
   const onFinish = async (data: any) => {
-    console.log(data)
+    console.log(data);
     await userLogin(data);
   };
 
   useEffect(() => {
     if (!isFetching) {
       if (isSuccess) {
-        toast.success(`Seja bem-vindo(a), ${userData.name}!`);
-        navigate("/");
+        toast.success(`Seja bem-vindo(a), ${userData?.name}!`);
+        navigate("/myprofile");
       }
       if (isError) {
         toast.error(`E-mail ou senha incorretos`);

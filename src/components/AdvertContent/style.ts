@@ -7,6 +7,8 @@ export const Container = styled.div`
 
   position: relative;
   z-index: 99999999999999999999;
+
+  padding: 94px;
 `;
 
 export const Form = styled.form`

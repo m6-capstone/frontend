@@ -21,11 +21,11 @@ import { AiOutlineClose } from "react-icons/ai";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { mockCarros } from "../../mocks";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
 
 export default function AdvertContent({ handleCloseModal }: any) {
-  const { createAdvert, isSuccess } = useContext(AdvertsContext)
+  const { createAdvert, isSuccess } = useContext(AdvertsContext);
 
   const advertSchema = yup.object().shape({
     title: yup.string().required("Título obrigatório"),
@@ -43,21 +43,42 @@ export default function AdvertContent({ handleCloseModal }: any) {
     register,
     control,
     handleSubmit,
+    setValue,
+
     formState: { errors },
   } = useForm({
     resolver: yupResolver(advertSchema),
   });
 
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
-    control, 
-    name: "galleryImages",
-  });
+  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
+    {
+      control,
+      name: "galleryImages",
+    }
+  );
 
   const onSubmitFunction = async (data: any) => {
-      await createAdvert(data)
-      /* handleCloseModal(false) */
-      console.log(data)
+    await createAdvert(data);
+    handleCloseModal(false);
+    console.log(data);
   };
+
+  const [advertsType, setAdvertsType] = useState("common");
+  const [vehicleType, setVehicleType] = useState("car");
+
+  register("advertsType", {
+    value: advertsType,
+  });
+  register("vehicleType", {
+    value: vehicleType,
+  });
+
+  useEffect(() => {
+    setValue("advertsType", advertsType);
+  }, [advertsType]);
+  useEffect(() => {
+    setValue("vehicleType", vehicleType);
+  }, [vehicleType]);
 
   return (
     <Container>
@@ -78,12 +99,18 @@ export default function AdvertContent({ handleCloseModal }: any) {
               backgroundColor="brand1"
               width="228px"
               color="white"
+              onClick={() => {
+                setAdvertsType("common");
+              }}
             />
             <Button
               content="Leilão"
               textStyle="button-big-text"
               width="228px"
               borderColor="grey4"
+              onClick={() => {
+                setAdvertsType("auction");
+              }}
             />
           </AdvertType>
 
@@ -149,12 +176,18 @@ export default function AdvertContent({ handleCloseModal }: any) {
               backgroundColor="brand1"
               width="228px"
               color="white"
+              onClick={() => {
+                setVehicleType("car");
+              }}
             />
             <Button
               content="Moto"
               textStyle="button-big-text"
               width="228px"
               borderColor="grey4"
+              onClick={() => {
+                setVehicleType("motorcycle");
+              }}
             />
           </VehicleType>
 

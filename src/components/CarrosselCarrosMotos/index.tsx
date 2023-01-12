@@ -64,13 +64,9 @@ export const CarrosselCarrosMotos = ({
             </EmptyMessage>
           ) : (
             <>
-              <Swiper
-                slidesPerView={"auto"}
-                spaceBetween={24}
-                className="mySwiper"
-              >
-                <SwiperSlide>
-                  {advertsList[listType]?.map((car, index) => (
+              <Swiper slidesPerView={"auto"} spaceBetween={24}>
+                {advertsList[listType]?.map((car, index) => (
+                  <SwiperSlide>
                     <CarouselCarsItem key={index}>
                       <Link to={`/product/${car.id}`}>
                         <CarouselCarsImageContainer>
@@ -122,8 +118,8 @@ export const CarrosselCarrosMotos = ({
                         )}
                       </CarouselCarsItemDeatils>
                     </CarouselCarsItem>
-                  ))}
-                </SwiperSlide>
+                  </SwiperSlide>
+                ))}
               </Swiper>
             </>
           ))}
