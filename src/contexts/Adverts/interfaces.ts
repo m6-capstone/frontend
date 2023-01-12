@@ -56,4 +56,5 @@ export interface AdvertsContextType {
   findCarById: (id: string) => void;
   createComment: (id: string, data: IComment) => void;
   refreshComments: () => void;
+  getAdvertsByUser: (id: string) => void;
 }

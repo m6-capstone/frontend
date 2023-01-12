@@ -26,7 +26,8 @@ import { Button } from "../Button";
 import { IAdvert } from "../../contexts/Adverts/interfaces";
 import { useContext, useEffect, useState } from "react";
 import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/User/UserContext";
 
 interface ICarouselCarros {
   title: string;
@@ -44,20 +45,29 @@ export const CarrosselCarrosMotos = ({
   refNav,
   listType,
 }: ICarouselCarros) => {
-  const { advertsList, getAdvertList, isLoaded, isEmpty } =
+  const { advertsList, getAdvertList, isFetching, getAdvertsByUser } =
     useContext(AdvertsContext);
 
+  const { userData, isLoggedIn } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (!isLoaded) {
-      getAdvertList();
-    }
-  }, []);
+    console.log(userData);
+    if (isLoggedIn && adminView) {
+      getAdvertsByUser(userData?.id);
+    } else getAdvertList();
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    console.log(advertsList);
+  }, [advertsList]);
 
   return (
     <CarouselCarsContainer ref={refNav}>
       <CarouselTitle>{title}</CarouselTitle>
       <CarouselCars>
-        {isLoaded &&
+        {!isFetching &&
           (advertsList[listType]?.length === 0 ? (
             <EmptyMessage>
               Não há {title.toLowerCase()} nessa lista.
@@ -66,7 +76,7 @@ export const CarrosselCarrosMotos = ({
             <>
               <Swiper slidesPerView={"auto"} spaceBetween={24}>
                 {advertsList[listType]?.map((car, index) => (
-                  <SwiperSlide>
+                  <SwiperSlide key={index}>
                     <CarouselCarsItem key={index}>
                       <Link to={`/product/${car.id}`}>
                         <CarouselCarsImageContainer>
@@ -113,6 +123,9 @@ export const CarrosselCarrosMotos = ({
                               content="Ver como"
                               borderColor="grey1"
                               color="grey1"
+                              onClick={() => {
+                                navigate(`/product/${car.id}`);
+                              }}
                             />
                           </ButtonWrapper>
                         )}
