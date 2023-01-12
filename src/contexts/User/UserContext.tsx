@@ -23,6 +23,7 @@ const initialValue = {
   openEditProfile: () => {},
   closeEditProfile: () => {},
   editProfile: () => {},
+  registerUser: () => {},
 };
 
 export const UserContext = createContext<UserContextType>(initialValue);
@@ -160,6 +161,19 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
     await setModalEditProfile(false);
   };
 
+  const registerUser = async (data: any) => {
+    await api
+      .post(`/users/`, data)
+      .then(async (res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      })
+      .finally(() => {});
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -180,6 +194,7 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
         openEditProfile,
         closeEditProfile,
         editProfile,
+        registerUser,
       }}
     >
       {children}

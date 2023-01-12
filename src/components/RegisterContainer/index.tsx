@@ -1,5 +1,7 @@
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/User/UserContext";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import {
@@ -14,15 +16,28 @@ import {
 export const RegisterContainer = () => {
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   const navigate = useNavigate();
+  const { registerUser } = useContext(UserContext);
 
-  const onFinish = (data: any) => {
+  const onFinish = async (data: any) => {
+    await registerUser(data);
     navigate("/");
   };
+
+  const [isSeller, setIsSeller] = useState(true);
+
+  register("isSeller", {
+    value: isSeller,
+  });
+
+  useEffect(() => {
+    setValue("isSeller", isSeller);
+  }, [isSeller]);
 
   return (
     <>
@@ -101,8 +116,8 @@ export const RegisterContainer = () => {
               placeholder="Digitar rua"
               type="text"
               label="Rua"
-              register={{ ...register("address") }}
-              error={errors.address?.message}
+              register={{ ...register("street") }}
+              error={errors.street?.message}
             />
             <RegisterFormDiv>
               <Input
@@ -123,17 +138,25 @@ export const RegisterContainer = () => {
             <RegisterFormLabel>Tipo de conta</RegisterFormLabel>
             <RegisterFormDiv>
               <Button
+                type="button"
                 textStyle="button-big-text"
                 content="Comprador"
                 borderColor="brand1"
                 color="white"
                 backgroundColor="brand1"
+                onClick={() => {
+                  setIsSeller(false);
+                }}
               />
               <Button
+                type="button"
                 textStyle="button-big-text"
                 content="Anuciante"
                 borderColor="grey4"
                 color="grey0"
+                onClick={() => {
+                  setIsSeller(true);
+                }}
               />
             </RegisterFormDiv>
             <Input

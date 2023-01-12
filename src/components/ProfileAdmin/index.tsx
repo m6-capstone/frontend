@@ -49,6 +49,10 @@ export const ProfileAdmin = () => {
         <ModalEditProfile handleModal={closeEditProfile}></ModalEditProfile>
       )}
 
+      {modalEditProfile && (
+        <ModalEditProfile handleModal={closeEditProfile}></ModalEditProfile>
+      )}
+
       <ProfileAdminContainer>
         <BlueBackground></BlueBackground>
         <Profile>

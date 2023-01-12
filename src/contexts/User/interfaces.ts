@@ -46,4 +46,5 @@ export interface UserContextType {
   autoLogin: () => void;
   getUserById: (id: string) => void;
   editProfile: (id: string, data: any) => void;
+  registerUser: (data: any) => void;
 }
