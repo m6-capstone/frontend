@@ -7,7 +7,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { Button } from "../Button";
 import { Input } from "../Input";
 
-export default function EditAdvertContent({handleCloseModal}:any) {
+export default function EditAdvertContent({handleModal}:any) {
   const advertSchema = yup.object().shape({
     title: yup.string().required("Título obrigatório"),
     year: yup.string().required("Ano obrigatório").email("E-mail inválido"),
@@ -40,7 +40,7 @@ export default function EditAdvertContent({handleCloseModal}:any) {
         <>
           <AdvertHeader>
             <HeaderTitle> Editar anúncio</HeaderTitle>
-            <ModalCloseButton onClick={handleCloseModal}><AiOutlineClose fill="#ADB5BD"/></ModalCloseButton>
+            <ModalCloseButton onClick={handleModal}><AiOutlineClose fill="#ADB5BD"/></ModalCloseButton>
           </AdvertHeader>
 
           <AdverTypeTitle>Tipo de anúncio</AdverTypeTitle> 
@@ -85,8 +85,8 @@ export default function EditAdvertContent({handleCloseModal}:any) {
           <Button content="Adicionar campo para imagem da galeria" textStyle="button-small-text" color="brand1" height="5px" backgroundColor="brand4"/>
           
           <ButtonContainer>
-            <Button content="Cancelar" textStyle="button-medium-text" width="228px" borderColor="grey6"  backgroundColor="grey6" type="reset" onClick={handleCloseModal}/>
-            <Button content="Criar anúncio" textStyle="button-medium-text" backgroundColor="brand3" width="228px" color="white" type="submit" onClick={handleCloseModal}/>
+            <Button content="Cancelar" textStyle="button-medium-text" width="228px" borderColor="grey6"  backgroundColor="grey6" type="reset" onClick={handleModal}/>
+            <Button content="Criar anúncio" textStyle="button-medium-text" backgroundColor="brand3" width="228px" color="white" type="submit" onClick={handleModal}/>
           </ButtonContainer>
         </>
       </Form>
