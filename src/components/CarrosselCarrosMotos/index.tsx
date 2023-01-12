@@ -39,14 +39,7 @@ interface ICarouselCarros {
   listType: string;
 }
 
-export const CarrosselCarrosMotos = ({
-  title,
-  name,
-  adminView,
-  refNav,
-  listType,
-  handleModal
-}: ICarouselCarros) => {
+export const CarrosselCarrosMotos = ({title,name,adminView,refNav,listType,}: ICarouselCarros) => {
   const { advertsList, getAdvertList, isFetching, getAdvertsByUser } =
     useContext(AdvertsContext);
 
@@ -65,9 +58,11 @@ export const CarrosselCarrosMotos = ({
     console.log(advertsList);
   }, [advertsList]);
 
+  const [modal, setModal] = useState(false);
+
   return (
     <CarouselCarsContainer ref={refNav}>
-      <ModalComponent handleModal={handleModal}/>
+      {modal && <ModalComponent handleModal={setModal}></ModalComponent>}
 
       <CarouselTitle>{title}</CarouselTitle>
       <CarouselCars>
@@ -121,6 +116,7 @@ export const CarrosselCarrosMotos = ({
                               content="Editar"
                               borderColor="grey1"
                               color="grey1"
+                              onClick={() => setModal(true)}
                             />
                             <Button
                               textStyle="button-big-text"

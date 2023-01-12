@@ -89,3 +89,17 @@ export const ButtonContainer = styled.div`
     gap: 20px;
     padding: 16px 0px;
 `
+
+export const PublishedTitle = styled.h3`
+    ${(props) => props.theme.typography.text["body-2-500"]};
+`
+
+export const Published = styled.div`
+    ${(props) => props.theme.typography.text["body-2-500"]};
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    padding: 16px 0px;
+    gap: 10px;
+`

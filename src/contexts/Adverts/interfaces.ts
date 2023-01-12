@@ -31,6 +31,19 @@ export interface IAdvertCreate {
   isPublished: boolean;
 }
 
+export interface IAdvertUpdate {
+  advertsType: string;
+  title: string;
+  year: string;
+  mileage: string;
+  price: string;
+  description: string;
+  vehicleType: string;
+  coverImage: string;
+  galleryImage: string;
+  isPublished: boolean;
+}
+
 export interface IComment {
   text: string;
 }
@@ -53,6 +66,7 @@ export interface AdvertsContextType {
   getAuctionList: () => void;
   getAdvertList: () => void;
   createAdvert: (data: IAdvertCreate) => void;
+  updateAdvert: (data: IAdvertUpdate, id: string) => void;
   findCarById: (id: string) => void;
   createComment: (id: string, data: IComment) => void;
   refreshComments: () => void;

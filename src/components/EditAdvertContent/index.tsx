@@ -6,11 +6,19 @@ import toast from 'react-toastify'
 import { AiOutlineClose } from 'react-icons/ai'
 import { Button } from "../Button";
 import { Input } from "../Input";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
 
-export default function EditAdvertContent({handleCloseModal}:any) {
+interface IModalComponent {
+  handleModal: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function EditAdvertContent({handleModal}:IModalComponent) {
+  const { updateAdvert, advertData } = useContext(AdvertsContext);
+
   const advertSchema = yup.object().shape({
     title: yup.string().required("Título obrigatório"),
-    year: yup.string().required("Ano obrigatório").email("E-mail inválido"),
+    year: yup.string().required("Ano obrigatório"),
     mileage: yup.string().required("Quilometragem obrigatória"),
     price: yup.number().required("Preço obrigatório"),
     description: yup.string().required("Descrição obrigatória"),
@@ -23,15 +31,34 @@ export default function EditAdvertContent({handleCloseModal}:any) {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors }
     } = useForm({
     resolver: yupResolver(advertSchema)
   });
     
-  const onSubmitFunction = async (data:object) => {
-    console.log(data)
-    /* handleCloseModal(true) */
+  const onSubmitFunction = async (data:any) => {
+    updateAdvert(data,advertData?.id)
+    handleModal(true)
   }
+
+  const [advertsType, setAdvertsType] = useState("common");
+  const [vehicleType, setVehicleType] = useState("car");
+
+  register("advertsType", {
+    value: advertsType,
+  });
+  register("vehicleType", {
+    value: vehicleType,
+  });
+ 
+  useEffect(() => {
+    setValue("advertsType", advertsType);
+  }, [advertsType]);
+  useEffect(() => {
+    setValue("vehicleType", vehicleType);
+  }, [vehicleType]);
+  
 
   return (
     <Container>
@@ -39,13 +66,13 @@ export default function EditAdvertContent({handleCloseModal}:any) {
         <>
           <AdvertHeader>
             <HeaderTitle> Editar anúncio</HeaderTitle>
-            <ModalCloseButton onClick={handleCloseModal}><AiOutlineClose fill="#ADB5BD"/></ModalCloseButton>
+            <ModalCloseButton onClick={() => handleModal(false)}><AiOutlineClose fill="#ADB5BD"/></ModalCloseButton>
           </AdvertHeader>
 
           <AdverTypeTitle>Tipo de anúncio</AdverTypeTitle> 
           <AdvertType>
-              <Button content="Venda" textStyle="button-big-text" backgroundColor="brand1" width="228px" color="white"/>
-              <Button content="Leilão" textStyle="button-big-text" width="228px" borderColor="grey4"/>
+              <Button content="Venda" textStyle="button-big-text" backgroundColor="brand1" width="228px" color="white" onClick={() => {setAdvertsType("common");}}/>
+              <Button content="Leilão" textStyle="button-big-text" width="228px" borderColor="grey4" />
           </AdvertType>
 
           <SubTitle>Informações do veículo</SubTitle>  
@@ -69,13 +96,13 @@ export default function EditAdvertContent({handleCloseModal}:any) {
 
           <VehicleTypeTitle>Tipo de Veículo</VehicleTypeTitle> 
           <VehicleType>
-              <Button content="Carro" textStyle="button-big-text" backgroundColor="brand1" width="228px" color="white"/>
+              <Button content="Carro" textStyle="button-big-text" backgroundColor="brand1" width="228px" color="white" onClick={() => {setVehicleType("car");}}/>
               <Button content="Moto" textStyle="button-big-text" width="228px" borderColor="grey4"/>
           </VehicleType>
           
           <PublishedTitle>Publicado</PublishedTitle>
           <Published>
-            <Button content="Sim" textStyle="button-big-text" width="228px" borderColor="grey4"/>
+            <Button content="Sim" type="button" textStyle="button-big-text" width="228px" borderColor="grey4" />
             <Button content="Não" textStyle="button-big-text" backgroundColor="brand1" width="228px" color="white"/>
           </Published>
 
@@ -89,8 +116,8 @@ export default function EditAdvertContent({handleCloseModal}:any) {
           <Button content="Adicionar campo para imagem da galeria" textStyle="button-small-text" color="brand1" height="5px" backgroundColor="brand4"/>
           
           <ButtonContainer> 
-            <Button content="Excluir anúncio" textStyle="button-medium-text" width="228px" borderColor="grey6"  backgroundColor="grey6" type="reset" onClick={handleCloseModal}/>
-            <Button content="Salvar alterações" textStyle="button-medium-text" backgroundColor="brand3" width="228px" color="white" type="submit" />
+            <Button content="Excluir anúncio" textStyle="button-small-text" width="228px" borderColor="grey6"  backgroundColor="grey6" type="reset"/>
+            <Button content="Salvar" textStyle="button-small-text" backgroundColor="brand3" width="228px" color="white" type="submit" />
           </ButtonContainer>
         </>
       </Form>
