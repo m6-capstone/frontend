@@ -35,15 +35,10 @@ export const Home = () => {
   }, [element]);
 
   useEffect(() => {
-    console.log(isLoggedIn);
     if (!isLoggedIn) {
       autoLogin();
     }
   }, []);
-
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
 
   return (
     <>

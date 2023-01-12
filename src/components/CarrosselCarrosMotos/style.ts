@@ -151,3 +151,16 @@ export const ButtonWrapper = styled.div`
   display: flex;
   gap: 16px;
 `;
+
+export const EmptyMessage = styled.h2`
+  ${(props) => props.theme.typography.heading["heading-7-500"]}
+  color: ${(props) => props.theme.colors.grey3};
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0 16px;
+
+  @media (min-width: 768px) {
+    padding: 0 60px;
+  }
+`;

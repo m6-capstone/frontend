@@ -41,7 +41,7 @@ export interface AdvertsContextProps {
 
 export interface AdvertsContextType {
   advertData: IAdvert;
-  advertsList: IAdvert[];
+  advertsList: { cars: IAdvert[]; motorcycles: IAdvert[] };
   isEmpty: boolean;
   isLoaded: boolean;
   isSuccess: boolean;

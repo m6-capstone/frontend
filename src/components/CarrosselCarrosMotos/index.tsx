@@ -13,6 +13,7 @@ import {
   CarouselCarsItemImage,
   CarouselCarsItemTitle,
   CarouselTitle,
+  EmptyMessage,
   InfoContainer,
   OwnerContainer,
   OwnerIcon,
@@ -23,7 +24,7 @@ import {
 } from "./style";
 import { Button } from "../Button";
 import { IAdvert } from "../../contexts/Adverts/interfaces";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
 import { Link } from "react-router-dom";
 
@@ -46,7 +47,6 @@ export const CarrosselCarrosMotos = ({
   const { advertsList, getAdvertList, isLoaded, isEmpty } =
     useContext(AdvertsContext);
 
-  console.log(advertsList);
   useEffect(() => {
     if (!isLoaded) {
       getAdvertList();
@@ -58,10 +58,10 @@ export const CarrosselCarrosMotos = ({
       <CarouselTitle>{title}</CarouselTitle>
       <CarouselCars>
         {isLoaded &&
-          (isEmpty ? (
-            <CarouselCarsItemTitle>
+          (advertsList[listType]?.length === 0 ? (
+            <EmptyMessage>
               Não há {title.toLowerCase()} nessa lista.
-            </CarouselCarsItemTitle>
+            </EmptyMessage>
           ) : (
             <>
               <Swiper
