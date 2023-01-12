@@ -49,6 +49,10 @@ export const ButtonContainer = styled.div`
   gap: 21px;
   width: 93.6%;
 
+  a {
+    width: 100%;
+  }
+
   @media (min-width: 768px) {
     flex-direction: row;
     width: 350px;
@@ -65,6 +69,8 @@ export const Button = styled.button`
   box-sizing: border-box;
 
   &:hover {
+    background-color: ${(props) => props.theme.colors.grey10};
+    color: ${(props) => props.theme.colors.grey0};
     cursor: pointer;
   }
 

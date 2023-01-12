@@ -3,7 +3,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import clock from "../../assets/clock.svg";
-import { MdArrowForward } from "react-icons/md";
+import { StyledArrowIcon } from "./style";
 
 import {
   Caroussel,
@@ -27,11 +27,33 @@ import {
   Timer,
 } from "./style";
 import { carrosLeilao } from "../../mocks";
+import { Button } from "../Button";
+import { useContext, useEffect } from "react";
+import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
 
-export const CarrosselLeilão = () => {
+export interface ICarrossel {
+  name: boolean;
+  adminView: boolean;
+  refNav?: React.MutableRefObject<null>;
+}
+
+export const CarrosselLeilão = ({ name, adminView, refNav }: ICarrossel) => {
+  const { auctionList, getAuctionList, getAdvertList, isLoaded, isEmpty } =
+    useContext(AdvertsContext);
+
+  useEffect(() => {
+    if (!isLoaded) {
+      getAuctionList();
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(auctionList);
+  }, [auctionList]);
+
   return (
-    <CarousselContainer>
-      <CarousselTitle>Leilão</CarousselTitle>
+    <CarousselContainer ref={refNav}>
+      {name && <CarousselTitle>Leilão</CarousselTitle>}
       <Caroussel>
         <Swiper slidesPerView={"auto"} spaceBetween={24} className="mySwiper">
           {carrosLeilao.map((car, index) => (
@@ -65,7 +87,7 @@ export const CarrosselLeilão = () => {
               </CarousselItem>
               <ItemButton>
                 <span>Acessar página do leilão</span>
-                <MdArrowForward size="1.5em" />
+                <StyledArrowIcon size="1.5em" />
               </ItemButton>
             </SwiperSlide>
           ))}

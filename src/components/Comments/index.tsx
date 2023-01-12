@@ -1,15 +1,40 @@
-import { Container, Title, CommentsContainer, Avatar, Name, Date, Comments} from "./style"
+import { useContext, useEffect, useState } from "react";
+import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
+import {
+  Container,
+  Title,
+  CommentsContainer,
+  Avatar,
+  Name,
+  Date,
+  Comment,
+} from "./style";
 
-export default function comments() {
+export default function Comments() {
+  const { advertData, isFetching, commentsList, refreshComments } =
+    useContext(AdvertsContext);
+
+  useEffect(() => {
+    console.log("hot!");
+  }, [advertData?.comments]);
+
   return (
     <Container>
-        <Title>Comentários</Title>
-        <CommentsContainer>
-          <Avatar>DJ</Avatar>
-          <Name>Daniel Josias</Name>
-          <Date>• há 3 dias</Date>
-        </CommentsContainer>
-        <Comments>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Comments> 
+      <Title>Comentários</Title>
+      {!isFetching && (
+        <>
+          {advertData?.comments.map((comment, index) => (
+            <>
+              <CommentsContainer>
+                <Avatar>{comment?.user?.name[0]}</Avatar>
+                <Name>{comment?.user?.name}</Name>
+                <Date>• há 3 dias</Date>
+              </CommentsContainer>
+              <Comment>{comment.text}</Comment>
+            </>
+          ))}
+        </>
+      )}
     </Container>
-  )
+  );
 }

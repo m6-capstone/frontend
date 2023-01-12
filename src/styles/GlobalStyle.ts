@@ -21,6 +21,11 @@ export const GlobalStyle = createGlobalStyle`
    button {
     cursor: pointer;
    }
+
+   a {
+    text-decoration: none;
+    color: unset;
+   }
 `;
 
 export const Heading_1_700 = styled.h1`

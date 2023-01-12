@@ -56,12 +56,23 @@ export const CarouselCarsImageContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  overflow: hidden;
+  border: 3px solid transparent;
+
+  ${CarouselCarsItem}:hover & {
+    border: 3px solid ${(props) => props.theme.colors.brand2};
+  }
 `;
 
 export const CarouselCarsItemImage = styled.img`
   height: 100%;
   width: 84%;
   max-width: 100%;
+
+  ${CarouselCarsItem}:hover & {
+    transform: scale(1.2);
+    transition: transform 0.5s ease-in-out;
+  }
 `;
 
 export const CarouselCarsItemDeatils = styled.div`
@@ -134,4 +145,22 @@ export const InfoContainer = styled.div`
 export const Price = styled.span`
   color: ${(props) => props.theme.colors.grey1};
   ${(props) => props.theme.typography.heading["heading-7-500"]}
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+
+export const EmptyMessage = styled.h2`
+  ${(props) => props.theme.typography.heading["heading-7-500"]}
+  color: ${(props) => props.theme.colors.grey3};
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0 16px;
+
+  @media (min-width: 768px) {
+    padding: 0 60px;
+  }
 `;

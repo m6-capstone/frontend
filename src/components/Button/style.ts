@@ -32,4 +32,8 @@ export const ButtonContainer = styled.button<IButtonContainer>`
   border-radius: 4px;
 
   color: ${(p) => p.props.color && p.theme.colors[p.props.color]};
+
+  &:hover {
+    background-color: ${(p) => p.theme.colors.brand4};
+  }
 `;

@@ -3,6 +3,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import {
+  ButtonWrapper,
   CarouselCars,
   CarouselCarsContainer,
   CarouselCarsImageContainer,
@@ -12,6 +13,7 @@ import {
   CarouselCarsItemImage,
   CarouselCarsItemTitle,
   CarouselTitle,
+  EmptyMessage,
   InfoContainer,
   OwnerContainer,
   OwnerIcon,
@@ -20,56 +22,120 @@ import {
   Tag,
   TagContainer,
 } from "./style";
+import { Button } from "../Button";
+import { IAdvert } from "../../contexts/Adverts/interfaces";
+import { useContext, useEffect, useState } from "react";
+import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/User/UserContext";
 
 interface ICarouselCarros {
   title: string;
-  mock: {
-    image: string;
-    title: string;
-    description: string;
-    owner: string;
-    iconColor: string;
-    tags: string[];
-    price: string;
-  }[];
+  mock?: IAdvert[];
+  name: boolean;
+  adminView: boolean;
+  refNav?: React.MutableRefObject<null>;
+  listType: string;
 }
 
-export const CarrosselCarrosMotos = ({ title, mock }: ICarouselCarros) => {
+export const CarrosselCarrosMotos = ({
+  title,
+  name,
+  adminView,
+  refNav,
+  listType,
+}: ICarouselCarros) => {
+  const { advertsList, getAdvertList, isFetching, getAdvertsByUser } =
+    useContext(AdvertsContext);
+
+  const { userData, isLoggedIn } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(userData);
+    if (isLoggedIn && adminView) {
+      getAdvertsByUser(userData?.id);
+    } else getAdvertList();
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    console.log(advertsList);
+  }, [advertsList]);
+
   return (
-    <CarouselCarsContainer>
+    <CarouselCarsContainer ref={refNav}>
       <CarouselTitle>{title}</CarouselTitle>
       <CarouselCars>
-        <Swiper slidesPerView={"auto"} spaceBetween={24} className="mySwiper">
-          {mock.map((car, index) => (
-            <SwiperSlide key={index}>
-              <CarouselCarsItem>
-                <CarouselCarsImageContainer>
-                  <CarouselCarsItemImage src={car.image} />
-                </CarouselCarsImageContainer>
-                <CarouselCarsItemDeatils>
-                  <CarouselCarsItemTitle>{car.title}</CarouselCarsItemTitle>
-                  <CarouselCarsItemDescription>
-                    {car.description}
-                  </CarouselCarsItemDescription>
-                  <OwnerContainer>
-                    <OwnerIcon backgroundColor={car.iconColor}>
-                      {car.owner[0]}
-                    </OwnerIcon>
-                    <OwnerName>{car.owner}</OwnerName>
-                  </OwnerContainer>
-                  <InfoContainer>
-                    <TagContainer>
-                      {car.tags.map((tag, index) => (
-                        <Tag key={index}>{tag}</Tag>
-                      ))}
-                    </TagContainer>
-                    <Price>{car.price}</Price>
-                  </InfoContainer>
-                </CarouselCarsItemDeatils>
-              </CarouselCarsItem>
-            </SwiperSlide>
+        {!isFetching &&
+          (advertsList[listType]?.length === 0 ? (
+            <EmptyMessage>
+              Não há {title.toLowerCase()} nessa lista.
+            </EmptyMessage>
+          ) : (
+            <>
+              <Swiper slidesPerView={"auto"} spaceBetween={24}>
+                {advertsList[listType]?.map((car, index) => (
+                  <SwiperSlide key={index}>
+                    <CarouselCarsItem key={index}>
+                      <Link to={`/product/${car.id}`}>
+                        <CarouselCarsImageContainer>
+                          <CarouselCarsItemImage src={car.coverImage} />
+                        </CarouselCarsImageContainer>
+                      </Link>
+                      <CarouselCarsItemDeatils>
+                        <Link to={`/product/${car.id}`}>
+                          <CarouselCarsItemTitle>
+                            {car.title}
+                          </CarouselCarsItemTitle>
+                        </Link>
+                        <Link to={`/product/${car.id}`}>
+                          <CarouselCarsItemDescription>
+                            {car.description}
+                          </CarouselCarsItemDescription>
+                        </Link>
+                        <OwnerContainer>
+                          <OwnerIcon backgroundColor={"random8"}>
+                            {car.user?.name[0]}
+                          </OwnerIcon>
+                          <OwnerName>{car.user?.name}</OwnerName>
+                        </OwnerContainer>
+                        <InfoContainer>
+                          <TagContainer>
+                            <Tag>{car.year}</Tag>
+                            <Tag>{car.mileage}</Tag>
+                          </TagContainer>
+                          <Price>
+                            R$ {car.price.split(".")[0]},
+                            {car.price.split(".")[1]}
+                          </Price>
+                        </InfoContainer>
+                        {adminView && (
+                          <ButtonWrapper>
+                            <Button
+                              textStyle="button-big-text"
+                              content="Editar"
+                              borderColor="grey1"
+                              color="grey1"
+                            />
+                            <Button
+                              textStyle="button-big-text"
+                              content="Ver como"
+                              borderColor="grey1"
+                              color="grey1"
+                              onClick={() => {
+                                navigate(`/product/${car.id}`);
+                              }}
+                            />
+                          </ButtonWrapper>
+                        )}
+                      </CarouselCarsItemDeatils>
+                    </CarouselCarsItem>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </>
           ))}
-        </Swiper>
       </CarouselCars>
     </CarouselCarsContainer>
   );
