@@ -33,6 +33,10 @@ export interface IAdvertCreate {
 
 export interface IComment {
   text: string;
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  user: any;
 }
 
 export interface AdvertsContextProps {

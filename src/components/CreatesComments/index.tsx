@@ -14,6 +14,7 @@ import { useContext, useEffect, useState } from "react";
 import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
 import { FieldValues, useController, useForm } from "react-hook-form";
 import { IComment } from "../../contexts/Adverts/interfaces";
+import { UserContext } from "../../contexts/User/UserContext";
 
 export default function CreatesComments() {
   const isMobile = useMediaQuery("(max-width: 767px)");
@@ -21,6 +22,8 @@ export default function CreatesComments() {
 
   const { advertData, isFetching, createComment, refreshComments } =
     useContext(AdvertsContext);
+  const {userData} = useContext(UserContext)
+  
 
   const {
     register,
@@ -51,8 +54,8 @@ export default function CreatesComments() {
     <Container>
       {!isFetching && (
         <CommentsHeader>
-          <Initials>{advertData.user?.name[0]}</Initials>
-          <Name>{advertData.user?.name}</Name>
+          <Initials>{userData?.name[0] || "U"}</Initials>
+          <Name>{userData?.name || "Usuario não Registrado"}</Name>
         </CommentsHeader>
       )}
       <form onSubmit={handleSubmit(onFinish)}>

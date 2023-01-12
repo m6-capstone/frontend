@@ -16,18 +16,18 @@ export default function Comments() {
 
   useEffect(() => {
     console.log("hot!");
-  }, [advertData.comments]);
+  }, [advertData?.comments]);
 
   return (
     <Container>
       <Title>Comentários</Title>
       {!isFetching && (
         <>
-          {advertData.comments.map((comment, index) => (
+          {advertData?.comments.map((comment, index) => (
             <>
               <CommentsContainer>
-                <Avatar>{advertData.user?.name[0]}</Avatar>
-                <Name>{advertData.user?.name}</Name>
+                <Avatar>{comment?.user?.name[0]}</Avatar>
+                <Name>{comment?.user?.name}</Name>
                 <Date>• há 3 dias</Date>
               </CommentsContainer>
               <Comment>{comment.text}</Comment>
