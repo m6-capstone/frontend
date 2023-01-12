@@ -39,29 +39,33 @@ export const Product = () => {
   return (
     <>
       <Header />
-      {!isFetching && (
-        <GlobalContainer>
-          <Main>
-            <ProductImage />
-            <CarInformation />
-            <Description />
+      {!isFetching && advertData ? (
+        <>
+          <GlobalContainer>
+            <Main>
+              <ProductImage />
+              <CarInformation />
+              <Description />
 
-            <Container props={{ isDesktop }}>
+              <Container props={{ isDesktop }}>
+                <ListImages />
+                <AdvertOwnerInformation />
+              </Container>
+
+              <Comments />
+              <CreatesComments />
+            </Main>
+
+            <Aside props={{ isMobile, isDesktop }}>
               <ListImages />
               <AdvertOwnerInformation />
-            </Container>
-
-            <Comments />
-            <CreatesComments />
-          </Main>
-
-          <Aside props={{ isMobile, isDesktop }}>
-            <ListImages />
-            <AdvertOwnerInformation />
-          </Aside>
-        </GlobalContainer>
+            </Aside>
+          </GlobalContainer>
+          <Footer />
+        </>
+      ) : (
+        <h1 style={{ textAlign: "center" }}>Anúncio não encontrado</h1>
       )}
-      <Footer />
     </>
   );
 };

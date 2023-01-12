@@ -10,23 +10,9 @@ import {
 } from "./interfaces";
 
 const initialValue = {
-  advertsList: [],
-  advertData: {
-    id: "",
-    advertsType: "",
-    title: "",
-    year: "",
-    mileage: "",
-    price: "",
-    description: "",
-    vehicleType: "",
-    coverImage: "",
-    galleryImages: [""],
-    isActive: true,
-    isPublished: true,
-    user: null,
-    comments: [],
-  },
+  advertsList: { cars: [], motorcycles: [] },
+  advertData: null,
+  auctionList: { cars: [], motorcycles: [] },
   isFetching: false,
   isEmpty: false,
   isLoaded: false,
@@ -40,6 +26,7 @@ const initialValue = {
   findCarById: () => {},
   createComment: () => {},
   refreshComments: () => {},
+  getAuctionList: () => {},
 };
 
 export const AdvertsContext = createContext<AdvertsContextType>(initialValue);
@@ -52,6 +39,8 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
   const [isSuccess, setIsSuccess] = useState(initialValue.isSuccess);
   const [isFetching, setIsFetching] = useState(initialValue.isFetching);
 
+  const [auctionList, setAuctionList] = useState(initialValue.auctionList);
+
   const [commentsList, setCommentsList] = useState(initialValue.commentsList);
 
   const token = localStorage.getItem("userToken");
@@ -63,7 +52,6 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
       .then(async (res) => {
         await setAdvertsList(res.data.common);
         setIsEmpty(res.data.common.length === 0 ? true : false);
-
         return res.data;
       })
       .catch((err) => {
@@ -86,9 +74,6 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
         `adverts`,
         {
           ...data,
-          isPublished: true,
-          advertsType: "common",
-          vehicleType: "car",
           galleryImages: [data.galleryImage],
         },
         config
@@ -113,9 +98,27 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
         setAdvertData(res.data);
       })
       .catch((err) => {
+        setAdvertData(null);
         return err;
       })
       .finally(() => {
+        setIsFetching(false);
+      });
+  };
+
+  const getAuctionList = async () => {
+    setIsFetching(true);
+    await api
+      .get(`/adverts`)
+      .then(async (res) => {
+        await setAdvertsList(res.data.auction);
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      })
+      .finally(() => {
+        setIsLoaded(true);
         setIsFetching(false);
       });
   };
@@ -141,7 +144,7 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
   };
 
   const refreshComments = () => {
-    setCommentsList(advertData.comments);
+    setCommentsList(advertData?.comments);
   };
 
   return (
@@ -157,7 +160,9 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
         createAdvert,
         findCarById,
         createComment,
+        getAuctionList,
         commentsList,
+        auctionList,
         refreshComments,
       }}
     >

@@ -26,7 +26,7 @@ export const MenuMobile = () => {
         <Menu>
           {isLoggedIn ? (
             <>
-              <Link to="/profileviewadmin">
+              <Link to="/myprofile">
                 <HeaderItem>{userData.name}</HeaderItem>
               </Link>
               <Button

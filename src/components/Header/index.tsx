@@ -1,5 +1,6 @@
 import {
   Bar,
+  DropdownMenuContent,
   HeaderContainer,
   HeaderItem,
   ImgLogo,
@@ -17,6 +18,7 @@ import { Link } from "react-router-dom";
 // import { logout } from "../../store/User/User.store";
 import { UserContext } from "../../contexts/User/UserContext";
 import DropdownMenu from "../DropDown";
+import { OwnerIcon } from "../CarrosselCarrosMotos/style";
 
 export const Header = () => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -53,25 +55,21 @@ export const Header = () => {
 
               {isLoggedIn ? (
                 <>
-                  {/* <Button
-                    textStyle="button-big-text"
-                    content="Logout"
-                    borderColor="alert1"
-                    color="alert1"
-                    onClick={() => {
-                      userLogout();
-                    }}
-                  /> */}
-                  <DropdownMenu> 
-                  <Link to="/profileviewadmin">
-                    <HeaderItem>{userData.name}</HeaderItem>
-                  </Link>
+                  <DropdownMenu>
+                    <Link to="/myprofile">
+                      <DropdownMenuContent>
+                        <OwnerIcon backgroundColor={"brand1"}>
+                          {userData.name[0]}
+                        </OwnerIcon>
+                        <HeaderItem>{userData.name}</HeaderItem>
+                      </DropdownMenuContent>
+                    </Link>
                   </DropdownMenu>
                 </>
               ) : (
                 <>
                   <Link to="/login">
-                    <HeaderItem>Fazer Login</HeaderItem>
+                    <HeaderItem>Login</HeaderItem>
                   </Link>
                   <Link to="/register">
                     <Button

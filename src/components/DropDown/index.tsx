@@ -30,7 +30,7 @@ function DropdownMenu({ children }) {
             Editar endereço
           </li>
           {userData?.isSeller ? (
-            <li onClick={() => navigate("/profileviewadmin")}>Meus Anúncios</li>
+            <li onClick={() => navigate("/myprofile")}>Meus Anúncios</li>
           ) : (
             <></>
           )}

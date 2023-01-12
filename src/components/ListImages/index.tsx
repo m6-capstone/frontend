@@ -8,16 +8,14 @@ export default function listImage() {
   const [modal, setModal] = useState(false);
   const [images, setImages] = useState({});
 
-  const handleOpenModal = (id: number) => {
+  const handleOpenModal = (index: number) => {
     setModal(true);
-
-    const image = mockCarros.filter((car) => {
-      return car.id === id;
-    });
-    setImages(image);
+    setImages(advertData?.galleryImages[index]);
   };
 
   const { advertData } = useContext(AdvertsContext);
+
+  console.log(advertData?.galleryImages);
 
   return (
     <Container>

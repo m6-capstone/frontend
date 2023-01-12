@@ -22,8 +22,9 @@ export const OptionList = styled.ul`
   border-radius: 4px;
 
   li {
-    &:hover{
-        cursor: pointer;
+    &:hover {
+      cursor: pointer;
+      color: ${(props) => props.theme.colors.brand1};
     }
     height: 28px;
     color: ${(props) => props.theme.colors.grey2};

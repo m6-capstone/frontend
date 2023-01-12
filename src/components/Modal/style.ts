@@ -11,6 +11,10 @@ export const ModalBackground = styled.div`
   z-index: 99999;
 
   overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ModalContainer = styled.div`
@@ -18,5 +22,5 @@ export const ModalContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  padding: 94px;
+  width: 100%;
 `;

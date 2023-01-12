@@ -27,8 +27,8 @@ export interface UserContextType {
   userToken: string;
   setUserToken: (newState: string) => void;
 
-  userData: IUser;
-  setUserData: (newState: IUser) => void;
+  userData: IUser | null;
+  // setUserData: (newState: IUser) => void;
 
   isLoggedIn: boolean;
   isFetching: boolean;
@@ -40,4 +40,5 @@ export interface UserContextType {
   getUser: (userToken: string) => void;
   userLogout: () => void;
   autoLogin: () => void;
+  getUserById: (id: string) => void;
 }
