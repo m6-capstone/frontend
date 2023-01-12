@@ -28,6 +28,7 @@ import { useContext, useEffect, useState } from "react";
 import { AdvertsContext } from "../../contexts/Adverts/AdvertsContext";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/User/UserContext";
+import { ModalComponent } from '../ModalEdit'
 
 interface ICarouselCarros {
   title: string;
@@ -38,13 +39,7 @@ interface ICarouselCarros {
   listType: string;
 }
 
-export const CarrosselCarrosMotos = ({
-  title,
-  name,
-  adminView,
-  refNav,
-  listType,
-}: ICarouselCarros) => {
+export const CarrosselCarrosMotos = ({title,name,adminView,refNav,listType,}: ICarouselCarros) => {
   const { advertsList, getAdvertList, isFetching, getAdvertsByUser } =
     useContext(AdvertsContext);
 
@@ -63,8 +58,12 @@ export const CarrosselCarrosMotos = ({
     console.log(advertsList);
   }, [advertsList]);
 
+  const [modal, setModal] = useState(false);
+
   return (
     <CarouselCarsContainer ref={refNav}>
+      {modal && <ModalComponent handleModal={setModal}></ModalComponent>}
+
       <CarouselTitle>{title}</CarouselTitle>
       <CarouselCars>
         {!isFetching &&
@@ -117,6 +116,7 @@ export const CarrosselCarrosMotos = ({
                               content="Editar"
                               borderColor="grey1"
                               color="grey1"
+                              onClick={() => setModal(true)}
                             />
                             <Button
                               textStyle="button-big-text"

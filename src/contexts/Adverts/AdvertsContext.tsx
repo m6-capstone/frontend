@@ -6,6 +6,7 @@ import {
   AdvertsContextType,
   IAdvert,
   IAdvertCreate,
+  IAdvertUpdate,
   IComment,
 } from "./interfaces";
 
@@ -21,6 +22,7 @@ const initialValue = {
 
   getAdvertList: () => {},
   createAdvert: () => {},
+  updateAdvert: () => {},
   setAdvertsList: () => {},
   setAdvertData: () => {},
   findCarById: () => {},
@@ -79,6 +81,25 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
         },
         config
       )
+      .then(async (res) => {
+        console.log(res.data);
+
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      })
+      .finally(() => {});
+  };
+
+  const updateAdvert = async (data: IAdvertUpdate, id: string) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    await api.patch(`adverts/${id}`,{...data,galleryImages: [data.galleryImage],},config)
       .then(async (res) => {
         console.log(res.data);
 
@@ -176,6 +197,7 @@ export const AdvertsContextProvider = ({ children }: AdvertsContextProps) => {
         isFetching,
         getAdvertList,
         createAdvert,
+        updateAdvert,
         findCarById,
         createComment,
         getAuctionList,
